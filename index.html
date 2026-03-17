@@ -6,758 +6,922 @@
 <title>Body Routine</title>
 <style>
 :root {
-  --bg: #0a0a0f;
-  --card: #14141f;
-  --card-border: #1e1e30;
-  --accent: #6366f1;
-  --text: #e8e8f0;
-  --text-dim: #8888a0;
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --timer-bg: #1a1a2e;
+  --bg: #09090b;
+  --card: #18181b;
+  --card2: #1e1e24;
+  --border: #27272a;
+  --accent: #818cf8;
+  --accent2: #6366f1;
+  --text: #fafafa;
+  --text2: #a1a1aa;
+  --text3: #71717a;
+  --green: #4ade80;
+  --green-bg: #4ade8012;
+  --yellow: #fbbf24;
+  --yellow-bg: #fbbf2412;
+  --red: #f87171;
+  --blue: #60a5fa;
+  --blue-bg: #60a5fa12;
+  --pink: #f472b6;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: var(--bg); color: var(--text);
-  min-height: 100dvh; overscroll-behavior: none;
-  -webkit-tap-highlight-color: transparent;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100dvh;overscroll-behavior:none;
+  -webkit-tap-highlight-color:transparent;
+  line-height:1.5;
 }
-.screen { display: none; min-height: 100dvh; }
-.screen.active { display: flex; flex-direction: column; }
+.screen{display:none;min-height:100dvh}
+.screen.active{display:flex;flex-direction:column}
 
-/* HOME */
-.home { padding: 24px 16px; gap: 16px; }
-.home h1 { font-size: 28px; font-weight: 800; text-align: center; margin-top: 12px; letter-spacing: -0.5px; }
-.home .subtitle { text-align: center; color: var(--text-dim); font-size: 13px; margin-bottom: 8px; }
-.routine-card {
-  background: var(--card); border: 1px solid var(--card-border);
-  border-radius: 16px; padding: 20px; cursor: pointer;
-  transition: transform 0.15s; display: flex; gap: 16px; align-items: center;
+/* === HOME === */
+.home{padding:20px 16px env(safe-area-inset-bottom);gap:12px;padding-bottom:40px}
+.home h1{font-size:26px;font-weight:800;text-align:center;margin:16px 0 2px;letter-spacing:-.5px}
+.home .sub{text-align:center;color:var(--text3);font-size:12px;margin-bottom:8px}
+.rcard{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:16px 18px;cursor:pointer;
+  transition:transform .12s;display:flex;gap:14px;align-items:center;
 }
-.routine-card:active { transform: scale(0.97); }
-.routine-icon {
-  width: 56px; height: 56px; border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px; flex-shrink: 0;
+.rcard:active{transform:scale(.97)}
+.ricon{
+  width:50px;height:50px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;flex-shrink:0;
 }
-.routine-icon.night { background: #7c3aed20; }
-.routine-icon.morning { background: #f59e0b20; }
-.routine-icon.pre { background: #06b6d420; }
-.routine-icon.weekly { background: #22c55e20; }
-.routine-icon.daily { background: #f472b620; }
-.routine-info { flex: 1; }
-.routine-info h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-.routine-info .meta { font-size: 13px; color: var(--text-dim); }
-.routine-info .meta span { margin-right: 12px; }
-.routine-card .arrow { color: var(--text-dim); font-size: 20px; flex-shrink: 0; }
+.ricon.n{background:#7c3aed18}.ricon.m{background:#f59e0b18}
+.ricon.p{background:#06b6d418}.ricon.w{background:#22c55e18}.ricon.d{background:#f472b618}
+.rinfo{flex:1}
+.rinfo h3{font-size:16px;font-weight:700;margin-bottom:2px}
+.rinfo .meta{font-size:12px;color:var(--text3)}
+.rinfo .meta span{margin-right:10px}
+.rcard .arr{color:var(--text3);font-size:18px;flex-shrink:0}
 
-/* EXERCISE */
-.exercise-screen { padding: 0; }
-.ex-header {
-  padding: 12px 16px; display: flex; align-items: center; gap: 12px;
-  border-bottom: 1px solid var(--card-border);
-  position: sticky; top: 0; background: var(--bg); z-index: 10;
+/* === EXERCISE === */
+.ex-screen{padding:0;background:var(--bg)}
+.ex-head{
+  padding:10px 16px;display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--bg);z-index:10;
 }
-.ex-back {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: var(--card); border: 1px solid var(--card-border);
-  color: var(--text); font-size: 20px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
+.ex-btn{
+  width:38px;height:38px;border-radius:10px;
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
 }
-.ex-title { font-size: 16px; font-weight: 700; flex: 1; }
-.ex-progress-text { font-size: 13px; color: var(--text-dim); }
-.ex-progress-bar { height: 3px; background: var(--card); }
-.ex-progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
-.ex-body {
-  flex: 1; padding: 20px 16px; overflow-y: auto;
-  display: flex; flex-direction: column; gap: 20px;
+.ex-ht{font-size:14px;font-weight:600;flex:1;color:var(--text2)}
+.ex-hp{font-size:12px;color:var(--text3);font-variant-numeric:tabular-nums}
+.pbar{height:3px;background:var(--card)}
+.pfill{height:100%;background:var(--accent);transition:width .3s}
+
+.ex-body{
+  flex:1;padding:20px 16px 0;overflow-y:auto;
+  display:flex;flex-direction:column;gap:16px;
+  padding-bottom:100px;
 }
-.ex-step-label {
-  font-size: 13px; color: var(--text-dim);
-  text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+
+/* Step header */
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:8px;
+  background:var(--accent);color:white;
+  font-size:13px;font-weight:800;flex-shrink:0;
 }
-.ex-step-name { font-size: 24px; font-weight: 800; line-height: 1.2; }
-.ex-duration-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--timer-bg); border-radius: 8px;
-  padding: 6px 12px; font-size: 14px; font-weight: 600;
-  color: var(--accent); width: fit-content;
+.step-head{display:flex;align-items:center;gap:10px}
+.step-cat{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.step-name{font-size:22px;font-weight:800;line-height:1.25;margin-top:2px}
+.step-time-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:5px 10px;font-size:13px;font-weight:600;color:var(--accent);width:fit-content;
 }
+.step-side{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;
+  width:fit-content;
+}
+.step-side.L{background:#3b82f618;color:#60a5fa}
+.step-side.R{background:#f4727118;color:#f87171}
+.step-side.both{background:#a78bfa18;color:#a78bfa}
+
+/* Instruction card */
+.inst-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+}
+.inst-header{
+  padding:14px 16px;font-size:14px;font-weight:700;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border);
+}
+.inst-header .icon{font-size:16px}
+.inst-content{padding:14px 16px}
+
+/* Numbered steps */
+.num-steps{display:flex;flex-direction:column;gap:12px}
+.num-step{display:flex;gap:12px;align-items:flex-start}
+.num-circle{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--accent2);color:white;
+  font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.num-text{font-size:14px;line-height:1.65;color:var(--text2)}
+.num-text strong{color:var(--text);font-weight:600}
+
+/* Tips / Feel / Mistakes */
+.tip-box{
+  border-radius:10px;padding:12px 14px;
+  font-size:13px;line-height:1.6;
+  margin-top:4px;
+}
+.tip-box.feel{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+.tip-box.feel strong{color:var(--green)}
+.tip-box.warn{background:var(--yellow-bg);border-left:3px solid var(--yellow);color:var(--yellow)}
+.tip-box.warn strong{color:var(--yellow)}
+.tip-box.why{background:var(--blue-bg);border-left:3px solid var(--blue);color:var(--blue)}
+.tip-box.why strong{color:var(--blue)}
+.tip-box .label{font-weight:700;margin-bottom:4px;display:block;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
 
 /* Timer */
-.timer-area {
-  background: var(--card); border: 1px solid var(--card-border);
-  border-radius: 20px; padding: 24px; text-align: center;
+.timer-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:24px;text-align:center;
 }
-.timer-display {
-  font-size: 56px; font-weight: 800;
-  font-variant-numeric: tabular-nums; letter-spacing: 2px; margin-bottom: 16px;
+.timer-num{
+  font-size:60px;font-weight:800;
+  font-variant-numeric:tabular-nums;letter-spacing:2px;
+  margin-bottom:16px;line-height:1;
 }
-.timer-controls { display: flex; gap: 12px; justify-content: center; }
-.timer-btn {
-  height: 48px; padding: 0 28px; border-radius: 12px; border: none;
-  font-size: 15px; font-weight: 700; cursor: pointer; transition: transform 0.1s;
+.timer-btns{display:flex;gap:10px;justify-content:center}
+.tbtn{
+  height:46px;padding:0 26px;border-radius:12px;border:none;
+  font-size:14px;font-weight:700;cursor:pointer;transition:transform .1s;
 }
-.timer-btn:active { transform: scale(0.95); }
-.timer-btn.primary { background: var(--accent); color: white; }
-.timer-btn.secondary { background: var(--card-border); color: var(--text); }
+.tbtn:active{transform:scale(.95)}
+.tbtn.go{background:var(--accent2);color:white}
+.tbtn.rst{background:var(--border);color:var(--text2)}
 
-.timer-ring { width: 200px; height: 200px; margin: 0 auto 16px; position: relative; }
-.timer-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.timer-ring circle { fill: none; stroke-width: 6; }
-.timer-ring .track { stroke: var(--card-border); }
-.timer-ring .progress {
-  stroke: var(--accent); stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s linear;
+.timer-ring{width:180px;height:180px;margin:0 auto 16px;position:relative}
+.timer-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer-ring circle{fill:none;stroke-width:5}
+.timer-ring .trk{stroke:var(--border)}
+.timer-ring .prg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .5s linear}
+.timer-ring .tt{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
 }
-.timer-ring .time-text {
-  position: absolute; inset: 0; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 44px; font-weight: 800; font-variant-numeric: tabular-nums;
-}
+.timer-ring .tt .big{font-size:42px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.timer-ring .tt .sm{font-size:12px;color:var(--text3);margin-top:4px}
 
-/* Sub timers */
-.sub-timer-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
-.sub-timer-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 14px; background: var(--timer-bg);
-  border-radius: 10px; font-size: 14px; transition: background 0.2s;
+/* Sub parts */
+.subs{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.sub-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;background:var(--card2);
+  border-radius:8px;font-size:13px;
 }
-.sub-timer-item.active { background: #6366f120; border: 1px solid #6366f140; }
-.sub-timer-item.done { opacity: 0.4; text-decoration: line-through; }
-.sub-timer-item .sub-name { flex: 1; }
-.sub-timer-item .sub-time { font-weight: 700; font-variant-numeric: tabular-nums; }
-
-/* Instructions */
-.ex-instructions {
-  background: var(--card); border: 1px solid var(--card-border);
-  border-radius: 16px; overflow: hidden;
-}
-.ex-instructions summary {
-  padding: 16px; font-size: 15px; font-weight: 700; cursor: pointer;
-  display: flex; align-items: center; gap: 8px; list-style: none;
-}
-.ex-instructions summary::-webkit-details-marker { display: none; }
-.ex-instructions summary::before {
-  content: '\25B6'; font-size: 10px; transition: transform 0.2s;
-}
-.ex-instructions[open] summary::before { transform: rotate(90deg); }
-.ex-instructions .inst-body {
-  padding: 0 16px 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim);
-}
-.ex-instructions .inst-body strong { color: var(--text); }
-.ex-instructions .inst-body .how-to {
-  background: #22c55e10; border-radius: 8px; padding: 12px;
-  margin-bottom: 8px; border-left: 3px solid var(--success);
-}
-.ex-instructions .inst-body .how-to strong { color: var(--success); }
-.ex-instructions .inst-body ul { padding-left: 20px; margin-bottom: 8px; }
-.ex-instructions .inst-body li { margin-bottom: 4px; }
-.ex-why {
-  font-size: 13px; color: var(--text-dim); line-height: 1.6;
-  padding: 12px 14px; background: var(--timer-bg);
-  border-radius: 10px; border-left: 3px solid var(--warning);
-}
-.ex-why strong { color: var(--warning); }
-
-/* Nav */
-.ex-nav {
-  padding: 16px; display: flex; gap: 12px;
-  border-top: 1px solid var(--card-border);
-  background: var(--bg); position: sticky; bottom: 0;
-}
-.nav-btn {
-  flex: 1; height: 56px; border-radius: 14px; border: none;
-  font-size: 16px; font-weight: 700; cursor: pointer; transition: transform 0.1s;
-}
-.nav-btn:active { transform: scale(0.97); }
-.nav-btn.prev {
-  background: var(--card); border: 1px solid var(--card-border);
-  color: var(--text-dim); flex: 0.4;
-}
-.nav-btn.skip {
-  background: var(--card); border: 1px solid var(--card-border);
-  color: var(--text-dim); flex: 0.4;
-}
-.nav-btn.next { background: var(--accent); color: white; }
-.nav-btn.finish { background: var(--success); color: white; }
-
-/* Complete */
-.complete-screen {
-  align-items: center; justify-content: center;
-  gap: 24px; padding: 32px; text-align: center;
-}
-.complete-icon { font-size: 64px; }
-.complete-screen h2 { font-size: 24px; font-weight: 800; }
-.complete-screen p { color: var(--text-dim); font-size: 15px; line-height: 1.6; }
-.complete-btn {
-  margin-top: 16px; height: 56px; padding: 0 40px;
-  border-radius: 14px; border: none; background: var(--accent);
-  color: white; font-size: 16px; font-weight: 700; cursor: pointer;
-}
+.sub-row.act{background:#818cf815;outline:1px solid #818cf830}
+.sub-row.dn{opacity:.35;text-decoration:line-through}
+.sub-row .sn{flex:1}.sub-row .st{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent)}
 
 /* Breathe */
-.breathe-circle {
-  width: 160px; height: 160px; border-radius: 50%;
-  background: radial-gradient(circle, #6366f130, transparent);
-  border: 2px solid var(--accent); margin: 0 auto;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 700;
-  transition: transform 5s ease-in-out, opacity 5s ease-in-out;
+.breathe{
+  width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,#818cf820,transparent);
+  border:2px solid var(--accent);margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;
+  transition:transform 5s ease-in-out,opacity 5s ease-in-out;
 }
-.breathe-circle.inhale { transform: scale(1.3); opacity: 1; }
-.breathe-circle.exhale { transform: scale(0.8); opacity: 0.6; }
+.breathe.in{transform:scale(1.35);opacity:1}
+.breathe.out{transform:scale(.75);opacity:.5}
 
-@media (min-width: 500px) {
-  .home, .ex-body, .ex-nav, .ex-header { max-width: 480px; margin-left: auto; margin-right: auto; }
-  .ex-progress-bar { max-width: 480px; margin: 0 auto; }
+/* Nav */
+.ex-nav{
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  display:flex;gap:10px;
+  border-top:1px solid var(--border);
+  background:var(--bg);position:fixed;bottom:0;left:0;right:0;z-index:10;
+}
+.nbtn{
+  flex:1;height:52px;border-radius:12px;border:none;
+  font-size:15px;font-weight:700;cursor:pointer;transition:transform .1s;
+}
+.nbtn:active{transform:scale(.97)}
+.nbtn.prev{background:var(--card);border:1px solid var(--border);color:var(--text2);flex:.35}
+.nbtn.skip{background:var(--card);border:1px solid var(--border);color:var(--text3);flex:.35}
+.nbtn.next{background:var(--accent2);color:white}
+.nbtn.fin{background:var(--green);color:#09090b}
+
+/* Complete */
+.comp{align-items:center;justify-content:center;gap:20px;padding:32px;text-align:center}
+.comp .ci{font-size:56px}
+.comp h2{font-size:22px;font-weight:800}
+.comp p{color:var(--text2);font-size:14px;line-height:1.6;max-width:300px}
+.comp button{
+  margin-top:12px;height:52px;padding:0 36px;
+  border-radius:12px;border:none;background:var(--accent2);
+  color:white;font-size:15px;font-weight:700;cursor:pointer;
+}
+
+/* Prep card */
+.prep-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:16px;
+}
+.prep-card h4{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:8px}
+.prep-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.prep-list li{font-size:13px;color:var(--text3);display:flex;align-items:center;gap:8px}
+.prep-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+@media(min-width:500px){
+  .home,.ex-body,.ex-nav,.ex-head{max-width:480px;margin-left:auto;margin-right:auto}
+  .pbar{max-width:480px;margin:0 auto}
+  .ex-nav{left:50%;transform:translateX(-50%);max-width:480px}
 }
 </style>
 </head>
 <body>
 
-<!-- HOME -->
 <div id="home" class="screen home active">
   <h1>Body Routine</h1>
-  <p class="subtitle">呼吸 &rarr; 骨盤 &rarr; 足部 &rarr; すべてが変わる</p>
-
-  <div class="routine-card" onclick="startRoutine('night')">
-    <div class="routine-icon night">&#127769;</div>
-    <div class="routine-info"><h3>夜ルーティン</h3><div class="meta"><span>25-30分</span><span>就寝45分前</span></div></div>
-    <div class="arrow">&rsaquo;</div>
-  </div>
-  <div class="routine-card" onclick="startRoutine('morning')">
-    <div class="routine-icon morning">&#9728;&#65039;</div>
-    <div class="routine-info"><h3>朝ルーティン</h3><div class="meta"><span>10-15分</span><span>起床後</span></div></div>
-    <div class="arrow">&rsaquo;</div>
-  </div>
-  <div class="routine-card" onclick="startRoutine('pre')">
-    <div class="routine-icon pre">&#9889;</div>
-    <div class="routine-info"><h3>本番 / 稽古前</h3><div class="meta"><span>5分</span><span>JKD・演奏前</span></div></div>
-    <div class="arrow">&rsaquo;</div>
-  </div>
-  <div class="routine-card" onclick="startRoutine('weekly')">
-    <div class="routine-icon weekly">&#128170;</div>
-    <div class="routine-info"><h3>週2-3回 補強</h3><div class="meta"><span>15分</span><span>稽古のない日</span></div></div>
-    <div class="arrow">&rsaquo;</div>
-  </div>
-  <div class="routine-card" onclick="startRoutine('daily')">
-    <div class="routine-icon daily">&#9201;</div>
-    <div class="routine-info"><h3>日中の1分ハック</h3><div class="meta"><span>30秒-1分</span><span>隙間時間に</span></div></div>
-    <div class="arrow">&rsaquo;</div>
-  </div>
+  <p class="sub">呼吸 → 骨盤 → 足部 → すべてが変わる</p>
+  <div class="rcard" onclick="go('night')"><div class="ricon n">&#127769;</div><div class="rinfo"><h3>夜ルーティン</h3><div class="meta"><span>25-30分</span><span>就寝45分前</span></div></div><div class="arr">&rsaquo;</div></div>
+  <div class="rcard" onclick="go('morning')"><div class="ricon m">&#9728;&#65039;</div><div class="rinfo"><h3>朝ルーティン</h3><div class="meta"><span>10-15分</span><span>起床後</span></div></div><div class="arr">&rsaquo;</div></div>
+  <div class="rcard" onclick="go('pre')"><div class="ricon p">&#9889;</div><div class="rinfo"><h3>本番 / 稽古前</h3><div class="meta"><span>5分</span><span>JKD・演奏前</span></div></div><div class="arr">&rsaquo;</div></div>
+  <div class="rcard" onclick="go('weekly')"><div class="ricon w">&#128170;</div><div class="rinfo"><h3>週2-3回 補強</h3><div class="meta"><span>15分</span><span>稽古のない日</span></div></div><div class="arr">&rsaquo;</div></div>
+  <div class="rcard" onclick="go('daily')"><div class="ricon d">&#9201;</div><div class="rinfo"><h3>日中の1分ハック</h3><div class="meta"><span>30秒-1分</span><span>隙間時間に</span></div></div><div class="arr">&rsaquo;</div></div>
 </div>
 
-<!-- EXERCISE -->
-<div id="exercise" class="screen exercise-screen">
-  <div class="ex-header">
-    <button class="ex-back" onclick="goHome()">&larr;</button>
-    <div class="ex-title" id="exTitle"></div>
-    <div class="ex-progress-text" id="exProgressText"></div>
+<div id="exercise" class="screen ex-screen">
+  <div class="ex-head">
+    <button class="ex-btn" onclick="home()">&larr;</button>
+    <div class="ex-ht" id="eHt"></div>
+    <div class="ex-hp" id="eHp"></div>
   </div>
-  <div class="ex-progress-bar"><div class="ex-progress-fill" id="exProgressFill"></div></div>
-  <div class="ex-body" id="exBody"></div>
-  <div class="ex-nav" id="exNav"></div>
+  <div class="pbar"><div class="pfill" id="ePf"></div></div>
+  <div class="ex-body" id="eB"></div>
+  <div class="ex-nav" id="eN"></div>
 </div>
 
-<!-- COMPLETE -->
-<div id="complete" class="screen complete-screen">
-  <div class="complete-icon" id="completeIcon"></div>
-  <h2 id="completeTitle"></h2>
-  <p id="completeMsg"></p>
-  <button class="complete-btn" onclick="goHome()">ホームに戻る</button>
+<div id="complete" class="screen comp">
+  <div class="ci" id="cI"></div>
+  <h2 id="cT"></h2>
+  <p id="cM"></p>
+  <button onclick="home()">ホームに戻る</button>
 </div>
 
 <script>
-// ===== ROUTINE DATA =====
-const routines = {
-  night: {
-    title: '夜ルーティン', icon: '\u{1F319}', color: '#7c3aed',
-    completeMsg: '副交感神経ON。このまま共鳴呼吸で入眠へ。',
-    steps: [
-      {
-        name: '足裏リリース', label: 'Step 1', totalSeconds: 180,
-        subParts: [
-          { name: '右足裏をボールで転がす', seconds: 90 },
-          { name: '左足裏（アーチ重点）', seconds: 90 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>ラクロスボール or テニスボールを床に置き、<strong>足で踏んでゆっくり転がす</strong>。立っても座ってもOK。<br><strong>痛い箇所で止めて20秒ホールド</strong>。呼吸は止めない。足裏全体をまんべんなく。</div>`,
-        why: '足裏のセンサーを起こす。ほぐすとハムストリングスの可動域が即座に5-10%改善する（足底筋膜→後方チェーン連結）。',
-      },
-      {
-        name: 'フォームローリング', label: 'Step 2', totalSeconds: 300,
-        subParts: [
-          { name: 'ハムストリングス（左右）', seconds: 120 },
-          { name: 'ふくらはぎ（左右）', seconds: 120 },
-          { name: '大殿筋', seconds: 60 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br><strong>ハムストリングス</strong>: フォームローラーに大腿後面を乗せ、ゆっくり転がす。<strong>痛い箇所で止めて20秒</strong>。<br><strong>ふくらはぎ</strong>: 内側→中央→外側の3ライン。足首を左右にゆっくり揺らしながら。<br><strong>大殿筋</strong>: 片尻ずつ乗せる。ラクロスボールに切り替えてもOK。<br><br>圧は<strong>10段階の5-6</strong>。痙攣しない強度で。<strong>呼吸はゆっくり鼻から</strong>。</div>`,
-        why: 'ハムストリングスの短縮が骨盤を後方に引いている（後傾2.7°の直接原因）。フォームローリング中にゆっくり呼吸すると可動域改善効果が20-30%増す。',
-      },
-      {
-        name: 'ストレッチ', label: 'Step 3', totalSeconds: 300,
-        subParts: [
-          { name: '90/90ヒップ（右前）', seconds: 30 },
-          { name: '90/90ヒップ（左前）', seconds: 30 },
-          { name: 'ハムストリングス（右脚）', seconds: 30 },
-          { name: 'ハムストリングス（左脚）', seconds: 30 },
-          { name: 'スパイナルツイスト（右）', seconds: 30 },
-          { name: 'スパイナルツイスト（左）', seconds: 30 },
-          { name: 'チャイルドポーズ', seconds: 60 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br><strong>90/90ヒップ</strong>: 床に座り、前脚も後脚も膝90°。胸を前脚の膝に近づける。<br><strong>ハムストリングス</strong>: 仰向け。タオルかバンドを足にかけて脚を上げる。<br><strong>スパイナルツイスト</strong>: 仰向けで片膝を反対側に倒す。<strong>肩は床から離さない</strong>。<br><strong>チャイルドポーズ</strong>: 正座から前に倒れ、額を床に。<strong>背中が360°膨らむ</strong>のを意識。</div>`,
-        why: 'チャイルドポーズは腹部の迷走神経枝を圧迫刺激する。副交感神経活性化のスイッチ。',
-      },
-      {
-        name: 'アキュプレッシャーマット', label: 'Step 4（任意）', totalSeconds: 600, optional: true,
-        subParts: [{ name: 'マットに背中を乗せる', seconds: 600 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>スパイクマットに<strong>背中を乗せて横になる</strong>だけ。<br>最初の1-2週間はTシャツ着用で10分。慣れたら素肌で15分。<br>目を閉じて、次のステップの呼吸を先に始めてもOK。</div>`,
-        why: '「スマホから離れて横になる」ための仕組み。意志力ではなく物理的な環境で行動を引き起こす。',
-      },
-      {
-        name: '共鳴呼吸', label: 'Step 5（核心）', totalSeconds: 300, breathing: true,
-        subParts: [{ name: '共鳴呼吸 6BPM', seconds: 300 }],
-        howTo: `<div class="how-to"><strong>やり方（Phase A: 最初の2週間）</strong><br><strong>クロコダイルブリージング</strong>: うつ伏せ、おでこに手を重ねる。<br>鼻から吸う → <strong>お腹が床を押す</strong>感覚 → 鼻からゆっくり吐く。5分。<br><br><strong>やり方（Phase B: 3週目以降）</strong><br>仰向けで<strong>5秒吸って、5秒吐く</strong>（1呼吸10秒 = 毎分6回）。<br>慣れたら: 5秒吸う → 5秒吐く → <strong>2秒止める</strong>。<br>そのまま寝落ちでOK。</div>`,
-        why: '4週間毎日の共鳴呼吸でHRVが有意改善。ボックスブリージングとの比較でCohen\'s d = 0.907の大差。これがルーティンの核。',
-      },
-    ]
+const R={
+night:{
+  title:'夜ルーティン',icon:'\u{1F319}',
+  done:'お疲れさま。副交感神経が優位になった状態。このまま呼吸を続けて、寝落ちしてOK。',
+  steps:[
+  // ── 足裏リリース ──
+  {
+    name:'足裏リリース（右足）',cat:'足裏リリース',sec:90,side:'R',
+    prep:['ラクロスボール or テニスボール 1個','立つか、椅子に座る'],
+    steps:[
+      '床にボールを置く。<strong>右足の土踏まずのあたり</strong>にボールが来るように、足を乗せる。',
+      '体重の<strong>3〜4割</strong>をボールにかける。全体重は乗せない。立っている場合は左足に体重を残す。座っている場合はそのままでOK。',
+      'ボールを<strong>つま先側からかかと側へ、ゆっくり転がす</strong>。片道3〜4秒くらいのスピード。',
+      '<strong>痛い箇所を見つけたら、そこで止めて20秒間じっとする</strong>。「イタ気持ちいい」くらいの圧で。激痛は強すぎ。',
+      '止めている間も<strong>鼻でゆっくり呼吸</strong>を続ける。息を止めない。',
+      '足裏の外側（小指側）も忘れずに。<strong>土踏まず → 外側 → 指の付け根</strong>の3エリアをまんべんなく。',
+    ],
+    feel:'足裏がじんわり温かくなる。終わった後に左右の足裏を比べると、右足の方が<strong>床をはっきり感じる</strong>はず。',
+    warn:'ボールが逃げる場合はカーペットや薄いマットの上で。<strong>骨の上（かかとの真ん中など）は避ける</strong>。柔らかい筋肉の部分を狙う。',
+    why:'足裏は全身の姿勢制御の「センサー」。ここをほぐすと、ハムストリングスの可動域が即座に5-10%改善する。',
   },
-  morning: {
-    title: '朝ルーティン', icon: '\u2600\uFE0F', color: '#f59e0b',
-    completeMsg: '関節が目覚めた。足裏と骨盤の土台ができた状態で1日が始まる。',
-    steps: [
-      {
-        name: '冷水洗顔', label: 'Step 1', totalSeconds: 60,
-        subParts: [
-          { name: '冷水で顔をつける', seconds: 30 },
-          { name: '2回目（任意）', seconds: 30 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>洗面台に<strong>冷水を溜めて顔をつける</strong>。10-15°C。30秒×1-2回。<br>冬場はシャワーの最後30秒を冷水に切り替えるのでもOK。</div>`,
-        why: '潜水反射: 三叉神経→迷走神経→即座に副交感神経のトーンが上がり心拍が下がる。朝の覚醒＋迷走神経のウォーミングアップ。',
-      },
-      {
-        name: 'CARs — 関節の目覚め', label: 'Step 2', totalSeconds: 300,
-        subParts: [
-          { name: '頸椎 回旋（各方向3回）', seconds: 40 },
-          { name: '肩甲骨（挙上→後退→下制→前突 各3回）', seconds: 50 },
-          { name: '肩関節 回旋（各方向3回）', seconds: 50 },
-          { name: '胸椎 回旋（各方向3回）', seconds: 40 },
-          { name: '股関節 回旋（右脚 各方向3回）', seconds: 40 },
-          { name: '股関節 回旋（左脚 各方向3回）', seconds: 40 },
-          { name: '足首（右 各方向5回）', seconds: 20 },
-          { name: '足首（左 各方向5回）', seconds: 20 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方（Controlled Articular Rotations）</strong><br>全関節を<strong>ゆっくり最大可動域で回す</strong>。強度は0-30%。「動かすだけ」でいい。<br><strong>頸椎</strong>: 頭をゆっくり大きく回す。<br><strong>肩甲骨</strong>: 肩をすくめる→後ろに引く→下げる→前に出す。<br><strong>肩関節</strong>: 腕をまっすぐ伸ばして大きく回す。<br><strong>胸椎</strong>: 座って、上半身だけ左右にゆっくりひねる。<br><strong>股関節</strong>: 片脚立ちで膝を持ち上げ、大きく回す。<br><strong>足首</strong>: 特に丁寧に。扁平足対策の要。</div>`,
-        why: '足首CARsは扁平足対策として特に重要。内側縦アーチの動的安定性に直結。',
-      },
-      {
-        name: '足部＋骨盤リプログラミング', label: 'Step 3', totalSeconds: 300,
-        subParts: [
-          { name: 'Short Foot Exercise（15回）', seconds: 60 },
-          { name: 'Toe Yoga（各パターン10回）', seconds: 60 },
-          { name: 'Psoas March（右脚8回）', seconds: 45 },
-          { name: 'Psoas March（左脚8回）', seconds: 45 },
-          { name: '片脚立ち（右 開眼30秒＋閉眼15秒）', seconds: 45 },
-          { name: '片脚立ち（左 開眼30秒＋閉眼15秒）', seconds: 45 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br><strong>Short Foot</strong>: 座って足を床に。<strong>中足骨を踵に引き寄せるようにアーチを持ち上げる</strong>。趾は浮かさない。地面をグッと掴む感じ。<br><br><strong>Toe Yoga</strong>: <strong>母趾だけ上げて他4指は床</strong> → <strong>他4指を上げて母趾は床</strong>。交互に。<br><br><strong>Psoas March</strong>: 仰向け、膝と股関節を90°に曲げる。<strong>腰椎を床につけたまま</strong>片脚をゆっくり伸ばして戻す。<br><br><strong>片脚立ち</strong>: 裸足で30秒。できたら<strong>目を閉じて15秒</strong>追加。</div>`,
-        why: 'Short Footは6週間で舟状骨降下距離32%改善。Psoas Marchは腸腰筋の強化で骨盤後傾を矯正。5週間以上の継続で有意差。',
-      },
-      {
-        name: '90/90呼吸', label: 'Step 4（任意）', totalSeconds: 150, optional: true, breathing: true,
-        subParts: [{ name: '90/90呼吸（5呼吸×2セット）', seconds: 150 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>仰向けで<strong>足を壁につけて膝・股関節を90°</strong>に。<br>ボール or クッションを膝の間に挟む。<br><strong>鼻から5秒吸い</strong>（背中が床を押す） → <strong>5秒吐く</strong>。<br>5呼吸 × 2セット。</div>`,
-        why: '骨盤後傾矯正＋呼吸パターンの統合。朝やれば1日の姿勢の基準点が変わる。',
-      },
-    ]
+  {
+    name:'足裏リリース（左足）',cat:'足裏リリース',sec:90,side:'L',
+    steps:[
+      '左足に切り替える。右足と同じ要領で、<strong>土踏まず → 外側 → 指の付け根</strong>を転がす。',
+      '左足は<strong>アーチ（土踏まず）を重点的に</strong>。扁平足の改善にはここが最重要。',
+      '痛い箇所で止めて20秒。鼻呼吸を続ける。',
+      '最後に、左右の足裏を交互に踏み比べてみる。<strong>「床の感触がクリアになった」</strong>と感じたら成功。',
+    ],
+    feel:'左右とも足裏がポカポカして、<strong>地面をしっかり掴める感覚</strong>が出ていればOK。',
   },
-  pre: {
-    title: '本番 / 稽古前', icon: '\u26A1', color: '#06b6d4',
-    completeMsg: '足裏→骨盤→呼吸→迷走神経。下から上にスイッチが入った。',
-    steps: [
-      {
-        name: 'Short Foot（立位）', label: 'Step 1', totalSeconds: 60,
-        subParts: [{ name: 'Short Foot Exercise', seconds: 60 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>立った状態で、<strong>中足骨を踵に引き寄せてアーチを持ち上げる</strong>。趾は浮かさない。<br>足裏で地面を掴む感覚。靴の中でもできる。</div>`,
-        why: '足裏のセンサーをONにして、姿勢制御の土台を作る。',
-      },
-      {
-        name: '片脚立ち（閉眼）', label: 'Step 2', totalSeconds: 60,
-        subParts: [
-          { name: '右脚（閉眼30秒）', seconds: 30 },
-          { name: '左脚（閉眼30秒）', seconds: 30 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br><strong>目を閉じて片脚立ち</strong>。30秒×各脚。<br>ふらついたら目を開けてリセット。足裏全体で床を感じる。</div>`,
-        why: '視覚依存の姿勢制御を固有受容覚に移行させる訓練。',
-      },
-      {
-        name: 'Standing Psoas March', label: 'Step 3', totalSeconds: 60,
-        subParts: [
-          { name: '右脚（5回、各3秒保持）', seconds: 30 },
-          { name: '左脚（5回、各3秒保持）', seconds: 30 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>立位で<strong>股関節を90°以上に挙上</strong>し、<strong>3秒保持</strong>して戻す。各脚5回。<br>体幹がブレないように。お腹に力を入れて骨盤を安定させる。</div>`,
-        why: '腸腰筋を活性化して骨盤をニュートラルに。',
-      },
-      {
-        name: '共鳴呼吸', label: 'Step 4', totalSeconds: 120, breathing: true,
-        subParts: [{ name: '共鳴呼吸 6BPM', seconds: 120 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br><strong>5秒吸って、5秒吐く</strong>。2分間。<br>鼻呼吸。目を閉じてもOK。</div>`,
-        why: '副交感神経を一度入れてから本番に入ると、演奏中の弓の安定性が上がる。',
-      },
-      {
-        name: '冷水で顔を洗う', label: 'Step 5', totalSeconds: 30,
-        subParts: [{ name: '冷水バシャッ', seconds: 30 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>手で水をすくって<strong>顔にバシャッ</strong>。それだけ。</div>`,
-        why: '潜水反射で迷走神経にスイッチ。覚醒＋落ち着きの両立。',
-      },
-    ]
+  // ── フォームローリング ──
+  {
+    name:'ハムストリングス（右）',cat:'フォームローリング',sec:60,side:'R',
+    prep:['フォームローラー 1本','床に座る'],
+    steps:[
+      '床に座って両脚を伸ばす。フォームローラーを<strong>右の太もも裏（お尻の少し下）</strong>の下に横向きに置く。',
+      '両手を後ろについて体を支え、<strong>左脚は膝を曲げて床につける</strong>（楽な姿勢になる）。',
+      'お尻を浮かせて、右太もも裏にローラーが当たるようにする。<strong>体重の5-6割</strong>をローラーにかける。',
+      '<strong>お尻側から膝裏の手前まで</strong>、ゆっくり前後に転がす。片道4〜5秒。',
+      '<strong>痛い箇所で止めて20秒</strong>。その間、足首をゆっくり左右に揺らすと周辺の筋膜もほぐれる。',
+      '太ももの裏の<strong>真ん中 → やや外側 → やや内側</strong>の3ラインを意識する。体を少しひねるとラインが変わる。',
+    ],
+    feel:'「ズーン」と鈍い圧迫感。やっているうちに<strong>痛みが和らいで筋肉が柔らかくなる</strong>感覚。',
+    warn:'<strong>膝裏の真上にローラーを当てない</strong>（神経が通っている）。膝裏の手前5cmで止める。痙攣したら圧を弱める。',
+    why:'ハムストリングスが硬いと骨盤を後方に引っ張る（後傾の直接原因）。ほぐしながら呼吸すると可動域改善効果が20-30%増す。',
   },
-  weekly: {
-    title: '週2-3回 補強', icon: '\u{1F4AA}', color: '#22c55e',
-    completeMsg: '殿筋・後脛骨筋・固有受容覚。構造的な変化はここから生まれる。',
-    steps: [
-      {
-        name: 'クラムシェル', label: 'A. 殿筋強化 ①', totalSeconds: 180,
-        subParts: [
-          { name: 'セット1（15回）', seconds: 60 },
-          { name: 'セット2（15回）', seconds: 60 },
-          { name: 'セット3（15回）', seconds: 60 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>バンドを膝の上に巻く。<strong>横向きに寝て、膝を曲げた状態</strong>。<br>足はくっつけたまま、<strong>上の膝を貝殻のように開く</strong>。ゆっくり戻す。<br>15回×3セット。骨盤が後ろに倒れないように。</div>`,
-        why: 'O脚・扁平足の上流にある殿筋の弱化を直接的に強化。',
-      },
-      {
-        name: 'ラテラルバンドウォーク', label: 'A. 殿筋強化 ②', totalSeconds: 180,
-        subParts: [
-          { name: 'セット1（15歩）', seconds: 60 },
-          { name: 'セット2（15歩）', seconds: 60 },
-          { name: 'セット3（15歩）', seconds: 60 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>バンドを膝の上に巻く。<strong>軽く膝を曲げて立つ</strong>。<br>バンドのテンションを保ちながら<strong>横にサイドステップ</strong>。<br>15歩×3セット。膝が内側に入らないように。</div>`,
-        why: '中殿筋を鍛えて膝の外反（O脚）を制御する。',
-      },
-      {
-        name: '片脚ブリッジ', label: 'A. 殿筋強化 ③', totalSeconds: 180,
-        subParts: [
-          { name: '右脚 セット1（10回）', seconds: 30 },
-          { name: '右脚 セット2（10回）', seconds: 30 },
-          { name: '右脚 セット3（10回）', seconds: 30 },
-          { name: '左脚 セット1（10回）', seconds: 30 },
-          { name: '左脚 セット2（10回）', seconds: 30 },
-          { name: '左脚 セット3（10回）', seconds: 30 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>仰向け。<strong>片脚を上げ、もう片方の足で床を踏んで臀部を持ち上げる</strong>。<br>上で1秒止めてゆっくり下ろす。10回×3セット（各脚）。</div>`,
-        why: '大殿筋の片側ずつの強化。骨盤の安定性に直結。',
-      },
-      {
-        name: 'バンド内反運動', label: 'B. 後脛骨筋 ①', totalSeconds: 180,
-        subParts: [
-          { name: 'セット1（15回）', seconds: 60 },
-          { name: 'セット2（15回）', seconds: 60 },
-          { name: 'セット3（15回）', seconds: 60 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>座ってバンドを足に巻く。<strong>足を内側＋下方向に引く（内反＋底屈）</strong>。<br>15回×3セット。ゆっくりコントロールして戻す。</div>`,
-        why: 'アーチを直接的に支える後脛骨筋の強化。',
-      },
-      {
-        name: 'カーフレイズ（内反位）', label: 'B. 後脛骨筋 ②', totalSeconds: 180,
-        subParts: [
-          { name: 'セット1（12回）', seconds: 60 },
-          { name: 'セット2（12回）', seconds: 60 },
-          { name: 'セット3（12回）', seconds: 60 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>立位で<strong>踵を内側に傾けながら持ち上げる</strong>（つま先立ち）。<br>12回×3セット。上で1秒止める。壁に手をついてOK。</div>`,
-        why: '内反位でのカーフレイズは後脛骨筋を選択的に強化する。',
-      },
-      {
-        name: 'バランスボード', label: 'C. プロプリオセプション', totalSeconds: 180,
-        subParts: [
-          { name: '両脚立ち 60秒 × 1', seconds: 60 },
-          { name: '両脚立ち 60秒 × 2', seconds: 60 },
-          { name: '片脚立ち 各脚20秒', seconds: 60 },
-        ],
-        howTo: `<div class="how-to"><strong>やり方（段階的に進行）</strong><br><strong>Week 1-2</strong>: 両脚で60秒×3 → 片脚（開眼）20秒×各脚<br><strong>Week 3-4</strong>: ボード上でShort Foot → 片脚（閉眼）15秒×各脚<br><strong>Week 5+</strong>: 片脚＋腕の動き（弓を持つシミュレーション）</div>`,
-        why: '6週間12セッションで片脚立位安定性が有意改善。視覚依存→固有受容覚依存への移行。',
-      },
-    ]
+  {
+    name:'ハムストリングス（左）',cat:'フォームローリング',sec:60,side:'L',
+    steps:[
+      '左の太もも裏に切り替え。右脚を曲げて床につける。',
+      '同じ要領で<strong>お尻側→膝裏手前</strong>をゆっくり転がす。',
+      '痛い箇所で20秒ホールド。鼻でゆっくり呼吸。',
+      '3ライン（真ん中・外側・内側）をまんべんなく。',
+    ],
   },
-  daily: {
-    title: '日中の1分ハック', icon: '\u23F1', color: '#f472b6',
-    completeMsg: '小さな介入の積み重ねが構造を変える。',
-    steps: [
-      {
-        name: 'Short Foot（座ったまま）', label: '座っている時', totalSeconds: 30,
-        subParts: [{ name: 'Short Foot', seconds: 30 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>靴の中でもできる。<strong>アーチを持ち上げる</strong>。趾は浮かさない。</div>`,
-        why: 'いつでもどこでも。足裏のセンサーを起こし続ける。',
-      },
-      {
-        name: '片脚立ち', label: '信号待ち / 電車', totalSeconds: 30,
-        subParts: [{ name: '片脚立ち（開眼）', seconds: 30 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>開眼でOK。どちらかの足を少し浮かせるだけでも効果あり。</div>`,
-        why: '固有受容覚トレーニングを日常に埋め込む。',
-      },
-      {
-        name: '共鳴呼吸 5呼吸', label: 'レッスンの合間', totalSeconds: 50, breathing: true,
-        subParts: [{ name: '5秒吸い→5秒吐き ×5回', seconds: 50 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>鼻から<strong>5秒吸って5秒吐く</strong>を5回。</div>`,
-        why: 'たった50秒でもHRVに即時的な変化が出る。',
-      },
-      {
-        name: 'Standing Psoas March', label: 'トイレの後', totalSeconds: 30,
-        subParts: [{ name: '各脚3回', seconds: 30 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>立って<strong>膝を90°以上持ち上げて3秒保持</strong>。各脚3回。</div>`,
-        why: '腸腰筋の活性化。骨盤ニュートラルを思い出させる。',
-      },
-      {
-        name: '顎セルフリリース', label: '疲れた時', totalSeconds: 60,
-        subParts: [{ name: '顎周辺マッサージ', seconds: 60 }],
-        howTo: `<div class="how-to"><strong>やり方</strong><br>耳の前あたり（顎関節の周り）を<strong>指で優しく円を描くようにほぐす</strong>。<br>口を軽く開けた状態で。外側翼突筋のリリース。</div>`,
-        why: '顎の緊張は全身の過緊張のサイン。緩めると呼吸も楽になる。',
-      },
-    ]
+  {
+    name:'ふくらはぎ（右）',cat:'フォームローリング',sec:60,side:'R',
+    steps:[
+      '両脚を伸ばして座る。ローラーを<strong>右のふくらはぎ</strong>の下に置く。',
+      '左脚は右脚の上に重ねると圧が増す。軽くしたい場合は横に置く。',
+      '<strong>アキレス腱の上あたりから膝裏手前</strong>まで、ゆっくり転がす。',
+      'ふくらはぎには3ライン：<strong>内側（すねの裏）→ 真ん中 → 外側</strong>。足を内向き・まっすぐ・外向きにして転がすとラインが変わる。',
+      '痛い箇所で止め、<strong>足首をゆっくり上下に動かす</strong>（つま先を自分に向けたり、遠ざけたり）。これでさらに深くほぐれる。',
+    ],
+    feel:'「コリコリ」した箇所が見つかるはず。ほぐれると<strong>足首の動きが軽く</strong>なる。',
   },
+  {
+    name:'ふくらはぎ（左）',cat:'フォームローリング',sec:60,side:'L',
+    steps:[
+      '左ふくらはぎに切り替え。',
+      '同じ要領で内側・真ん中・外側の3ラインを転がす。',
+      '痛い箇所で足首を上下に動かしながらホールド。',
+    ],
+  },
+  {
+    name:'大殿筋（お尻）',cat:'フォームローリング',sec:60,side:'both',
+    steps:[
+      'ローラーの上に<strong>右のお尻</strong>を乗せる。右足首を左膝の上に載せる（4の字にする）。',
+      '両手を後ろについて体を支える。<strong>お尻の一番盛り上がった部分</strong>にローラーが当たるように調整。',
+      '前後にゆっくり小さく動かす。<strong>痛い箇所で20秒</strong>ホールド。',
+      '左のお尻に切り替えて同様に。',
+      '※ ラクロスボールに替えるとピンポイントで効く。お尻の筋肉は厚いのでボールの方が深く届く。',
+    ],
+    feel:'お尻の奥に「ズーン」と届く感覚。ここが緩むと<strong>股関節の可動域がグッと広がる</strong>。',
+    warn:'尾骨（お尻の割れ目の一番下の骨）には当てない。',
+  },
+  // ── ストレッチ ──
+  {
+    name:'90/90ヒップストレッチ（右前）',cat:'ストレッチ',sec:30,side:'R',
+    prep:['床に座る（マットがあればベスト）'],
+    steps:[
+      '<strong>床に座る</strong>。右脚を前に出して、<strong>膝を90°に曲げる</strong>。右のすねが自分の体の正面に来るように（体と平行）。',
+      '左脚は<strong>体の左側に開いて、膝を90°に曲げる</strong>。左のすねは体と垂直に、後ろを向く。',
+      '上から見ると<strong>両脚でカタカナの「ヒ」の字</strong>を描く形になる。',
+      '背筋を伸ばしたまま、<strong>おへそを右すねに近づけるように上体を前に倒す</strong>。',
+      '<strong>右のお尻の外側〜股関節の前面</strong>にストレッチ感が出ればOK。無理に深く倒さなくていい。',
+      '呼吸は止めず、吐くたびに少しだけ深く倒れる。',
+    ],
+    feel:'右のお尻の横〜奥に<strong>じわっと伸びる感覚</strong>。痛みではなく「伸びている」感じ。',
+    warn:'膝に痛みが出たら角度を緩める。<strong>股関節に痛みがある場合は無理せず浅い角度で</strong>。後ろ脚の膝が浮いてもOK。',
+    why:'股関節の内旋・外旋可動域を同時に改善。骨盤の動きを正常化する。',
+  },
+  {
+    name:'90/90ヒップストレッチ（左前）',cat:'ストレッチ',sec:30,side:'L',
+    steps:[
+      '脚を入れ替える。<strong>左脚を前（すねが正面）、右脚を後ろ</strong>に。',
+      '同じく膝はどちらも90°。上から見て「ヒ」の字の左右反転。',
+      '背筋を伸ばして、おへそを左すねに近づけるように前に倒す。',
+      '左のお尻外側のストレッチ感を確認。吐くたびに少し深く。',
+    ],
+  },
+  {
+    name:'ハムストリングスストレッチ（右脚）',cat:'ストレッチ',sec:30,side:'R',
+    steps:[
+      '<strong>仰向けに寝る</strong>。両脚は伸ばしておく。',
+      'タオル、バンド、またはベルトを<strong>右足の裏（土踏まずのあたり）にかける</strong>。',
+      'タオルの両端を両手で持ち、<strong>右脚をまっすぐ天井に向かって持ち上げる</strong>。',
+      '膝は<strong>できるだけ伸ばす</strong>。完全に伸びなくてもOK。軽く曲がっている状態で十分。',
+      '<strong>太ももの裏がピーンと張る</strong>角度まで上げたら止める。激痛はNG。',
+      '左脚は<strong>床に伸ばしたまま</strong>。腰が床から浮かないように。',
+    ],
+    feel:'太もも裏全体に<strong>ピーンと張る感覚</strong>。膝裏〜お尻の付け根にかけて伸びている。',
+    warn:'<strong>反動をつけて引っ張らない</strong>。ゆっくり持ち上げて、伸びを感じたところでキープ。腰が浮いたら上げすぎ。',
+  },
+  {
+    name:'ハムストリングスストレッチ（左脚）',cat:'ストレッチ',sec:30,side:'L',
+    steps:[
+      '左脚に切り替え。タオルを左足裏にかける。',
+      '右脚は床に伸ばす。左脚をまっすぐ天井に向かって上げる。',
+      '太もも裏が張るところでキープ。呼吸を続ける。',
+    ],
+  },
+  {
+    name:'スパイナルツイスト（右）',cat:'ストレッチ',sec:30,side:'R',
+    steps:[
+      '<strong>仰向けに寝る</strong>。両腕を真横にT字に広げる。',
+      '<strong>右膝を曲げて胸に近づけ</strong>、そのまま<strong>左手で右膝を持って左側（床の方向）に倒す</strong>。',
+      '<strong>右の肩は床につけたまま</strong>。肩が浮いてしまうなら、膝を倒す角度を浅くする。',
+      '顔は<strong>右（膝と反対方向）を向く</strong>。',
+      '腰〜背中全体が<strong>ねじれてストレッチされる</strong>のを感じる。',
+      '吐くたびに力を抜いて、膝が床に近づいていく。無理に押し込まない。',
+    ],
+    feel:'腰まわり〜背中に<strong>気持ちいいねじれ感</strong>。お腹の内臓がマッサージされるような感覚。',
+    warn:'<strong>肩が浮かないことが最優先</strong>。膝が床につかなくても全然OK。',
+    why:'仙骨〜背骨の連結を緩めて、迷走神経が走行する内臓をマッサージ。副交感神経の活性化。',
+  },
+  {
+    name:'スパイナルツイスト（左）',cat:'ストレッチ',sec:30,side:'L',
+    steps:[
+      '反対側。<strong>左膝を曲げて右手で右側に倒す</strong>。',
+      '左肩は床につけたまま。顔は左を向く。',
+      '吐くたびに力を抜く。',
+    ],
+  },
+  {
+    name:'チャイルドポーズ',cat:'ストレッチ',sec:60,side:'both',
+    steps:[
+      '<strong>正座</strong>する（膝を曲げてお尻を踵に乗せる）。',
+      '膝を<strong>腰幅〜肩幅くらいに開く</strong>。つま先は合わせたまま。',
+      '<strong>両手を前に伸ばしながら、上体を前に倒す</strong>。額を床（またはマット）につける。',
+      'お尻は踵に乗せたまま。<strong>浮いてもOK</strong>だが、できるだけ踵に近づける意識。',
+      '両腕は前に伸ばす or 体の横に置いてもOK（楽な方で）。',
+      '<strong>鼻からゆっくり吸い、背中が風船のように膨らむ</strong>のを意識する。横・後ろに広がる感じ。',
+      '吐くときは<strong>全身の力を抜いて床に溶けていく</strong>イメージ。60秒間。',
+    ],
+    feel:'背中全体が<strong>360°広がる感覚</strong>。お腹が太ももに押されて、内臓がマッサージされる安心感。',
+    warn:'膝に痛みがあるなら正座を浅くする。額が床につかなければ拳を重ねてその上に額を置く。',
+    why:'腹部の迷走神経枝を圧迫刺激し、副交感神経のスイッチを入れる。ここから入眠モードに切り替わる。',
+  },
+  // ── アキュプレッシャーマット ──
+  {
+    name:'アキュプレッシャーマット',cat:'リラクゼーション（任意）',sec:600,optional:true,side:'both',
+    prep:['スパイクマット（なければスキップ）','Tシャツ着用（最初の1-2週間）'],
+    steps:[
+      'マットを床に敷く。',
+      '<strong>ゆっくりと背中から寝転がる</strong>。いきなりドスンと乗らない。',
+      '最初の30秒〜1分は<strong>チクチク痛い</strong>。これは正常。',
+      '<strong>鼻からゆっくり呼吸</strong>しながら待つと、1-2分で痛みが温かさに変わる。',
+      '慣れてきたら素肌で。足裏もマットに乗せるとさらに効果的。',
+      'このまま次のステップ（共鳴呼吸）を始めてもOK。',
+    ],
+    feel:'最初のチクチク → <strong>じんわり温かい → 体が重くなる</strong>。この変化が出れば副交感神経が優位になっている。',
+    why:'エビデンスとしてはマット自体より、「スマホを置いて横になる」仕組みとしての価値。呼吸法の強制プラットフォーム。',
+  },
+  // ── 共鳴呼吸 ──
+  {
+    name:'共鳴呼吸',cat:'呼吸（核心）',sec:300,breathing:true,side:'both',
+    steps:[
+      '<strong>仰向けに寝る</strong>。枕は使っても使わなくてもOK。',
+      '目を閉じる。両手はお腹の上か、体の横に。',
+      '<strong>鼻から5秒かけてゆっくり吸う</strong>。お腹が膨らむのを手で感じる。',
+      '<strong>鼻から5秒かけてゆっくり吐く</strong>。お腹がへこんでいく。',
+      'これを繰り返す。<strong>1呼吸10秒 = 毎分6回</strong>。',
+      '慣れてきたら、吐き終わった後に<strong>2秒止める</strong>（A52法: 5秒吸い→5秒吐き→2秒止め）。',
+      '<strong>苦しくならないペース</strong>で。楽にできれば効果的。そのまま寝落ちOK。',
+    ],
+    feel:'3分くらいで<strong>体が重くなり、手足が温かくなる</strong>。心拍が落ち着いてくるのがわかる。',
+    warn:'<strong>苦しいのに頑張り続けない</strong>。苦しかったら4秒吸い→4秒吐きに短くしてOK。無意識下でストレスを溜める方が有害。',
+    why:'4週間の毎日実践でHRVが有意改善。ボックスブリージングとの比較でCohen\'s d=0.907の圧倒的な差。24BPMの過呼吸パターンを6BPMにリセットする。',
+  },
+  ]
+},
+morning:{
+  title:'朝ルーティン',icon:'\u2600\uFE0F',
+  done:'関節が目覚めた。足裏と骨盤の土台ができた状態で1日が始まる。',
+  steps:[
+  {
+    name:'冷水洗顔',cat:'迷走神経',sec:60,side:'both',
+    steps:[
+      '洗面台に<strong>冷水を溜める</strong>（10-15°C。水道の水でOK）。',
+      '<strong>顔全体を冷水につける</strong>。30秒間。鼻から息を止めて。',
+      '顔を上げて呼吸。もう1回できればベスト。',
+      '※冬場はシャワーの最後30秒を冷水に切り替えるのでも可。',
+    ],
+    feel:'顔をつけた瞬間<strong>心拍がスッと落ちる</strong>のがわかる。顔を上げると頭がシャキッとする。',
+    why:'潜水反射（diving reflex）。三叉神経→迷走神経→副交感神経が即座にON。覚醒と落ち着きが同時に起こる。',
+  },
+  {
+    name:'首の回旋（頸椎CARs）',cat:'CARs',sec:40,side:'both',
+    steps:[
+      '<strong>背筋を伸ばして立つ or 座る</strong>。肩の力を抜く。',
+      '頭を<strong>右耳を右肩に近づけるように傾ける → そのまま後ろに回し → 左耳を左肩に → 前に回して元に戻る</strong>。',
+      '<strong>ゆっくり、最大可動域で</strong>。1周10秒くらいかけて。',
+      '時計回り3回 → 反時計回り3回。',
+      '力は入れない。「どこまで動くか確認する」くらいの感覚。',
+    ],
+    feel:'ゴリゴリ鳴る箇所がある場合は、特にそのあたりをゆっくり通過させる。',
+    warn:'<strong>痛みが走る方向には無理に回さない</strong>。痛みの手前で引き返す。',
+  },
+  {
+    name:'肩甲骨まわし',cat:'CARs',sec:50,side:'both',
+    steps:[
+      '両肩を<strong>耳に向かって持ち上げる</strong>（すくめる）。',
+      'そこから<strong>後ろに引く</strong>（胸を張る）。',
+      '<strong>下に落とす</strong>（肩を下げる）。',
+      '<strong>前に出す</strong>（背中を丸める）。',
+      'この4方向で<strong>大きく円を描く</strong>ように、ゆっくり回す。各方向3回。',
+      '逆回しも3回。',
+    ],
+    feel:'肩甲骨が背中の上で<strong>スムーズに滑る</strong>感覚。朝は引っかかりやすいので丁寧に。',
+  },
+  {
+    name:'肩関節の回旋',cat:'CARs',sec:50,side:'both',
+    steps:[
+      '<strong>右腕をまっすぐ前に伸ばす</strong>。',
+      'そのまま<strong>頭の上 → 後ろ → 下</strong>と、大きな円を描いて回す。',
+      '肩が詰まる角度では<strong>無理せず少し迂回して</strong>OK。',
+      '時計回り3回 → 反時計回り3回。',
+      '左腕も同様に。',
+    ],
+    warn:'肩が「カクッ」と引っかかるポイントは<strong>ゆっくり丁寧に通過</strong>する。勢いで突破しない。',
+  },
+  {
+    name:'胸椎の回旋',cat:'CARs',sec:40,side:'both',
+    steps:[
+      '<strong>椅子に座るか、あぐらで座る</strong>。',
+      '両手を胸の前で組む。',
+      '<strong>下半身は動かさず、上半身だけ右にひねる</strong>。できるだけ後ろを向く。',
+      'ゆっくり戻して、<strong>左にひねる</strong>。',
+      '各方向3回。<strong>骨盤は正面を向いたまま</strong>。動くのは胸椎だけ。',
+    ],
+    feel:'背骨の上の方（胸のあたり）が<strong>ねじれてほぐれる</strong>感覚。',
+  },
+  {
+    name:'股関節の回旋（右脚）',cat:'CARs',sec:40,side:'R',
+    steps:[
+      '<strong>壁や椅子に手をついて片脚立ち</strong>になる。',
+      '<strong>右膝を胸の高さまで持ち上げる</strong>。',
+      'そのまま<strong>膝を外側に開き → 後ろに回し → 下ろす</strong>。大きな円を描く。',
+      '時計回り3回 → 反時計回り3回。',
+      '<strong>体幹は揺らさない</strong>。動くのは股関節だけ。',
+    ],
+    feel:'股関節の前側〜横で<strong>引っかかる箇所</strong>があるはず。そこをゆっくり通す。',
+  },
+  {
+    name:'股関節の回旋（左脚）',cat:'CARs',sec:40,side:'L',
+    steps:[
+      '左脚に切り替え。壁に手をついたまま。',
+      '同様に膝を上げて大きく回す。各方向3回。',
+    ],
+  },
+  {
+    name:'足首の回旋（右）',cat:'CARs',sec:20,side:'R',
+    steps:[
+      '<strong>右足を床から浮かせる</strong>（座っても立ってもOK）。',
+      '<strong>足首をゆっくり大きく回す</strong>。つま先で大きな円を描くように。',
+      '時計回り5回 → 反時計回り5回。',
+      '<strong>できるだけ大きく</strong>。足の甲を伸ばす・すねに引きつける、の両方をしっかり。',
+    ],
+    why:'足首CARsは扁平足対策の要。内側縦アーチの動的安定性に直結。',
+  },
+  {
+    name:'足首の回旋（左）',cat:'CARs',sec:20,side:'L',
+    steps:['左足首に切り替え。同じくゆっくり大きく回す。各方向5回。'],
+  },
+  {
+    name:'Short Foot Exercise',cat:'足部リプログラミング',sec:60,side:'both',
+    steps:[
+      '<strong>椅子に座って裸足</strong>になる。両足を床に平らにつける。',
+      '<strong>足の指は床につけたまま</strong>、浮かせない。これが絶対ルール。',
+      '足の指の付け根（母趾球と小趾球）を<strong>踵に引き寄せるように、足裏を縮める</strong>。',
+      'するとアーチ（土踏まず）が<strong>グッと持ち上がる</strong>。',
+      '<strong>「地面を足裏で掴む」</strong>感覚。握るのではなく、吸盤のように吸い付く感じ。',
+      '3秒キープ → 緩める。これを<strong>15回</strong>。',
+      '※ 最初は「全然動かない！」と感じるかもしれない。<strong>意識して力を入れるだけでも効果あり</strong>。続ければ動くようになる。',
+    ],
+    feel:'土踏まずが<strong>ピクッと持ち上がる</strong>感覚。最初は微妙でも、1週間で明確に動くようになる。',
+    warn:'<strong>指を丸めて掴むのはNG</strong>。指は伸ばしたまま床についている。動くのは「アーチ」だけ。',
+    why:'メタ分析で6週間で舟状骨降下距離32%改善。扁平足に対する最強クラスのエビデンス。毎日やれ。',
+  },
+  {
+    name:'Toe Yoga',cat:'足部リプログラミング',sec:60,side:'both',
+    steps:[
+      '座った状態で裸足。足を床に平らにつける。',
+      '<strong>母趾（親指）だけ上に持ち上げる</strong>。他の4本は床につけたまま。3秒キープ。',
+      '母趾を下ろす。今度は<strong>他の4本の指を上に持ち上げる</strong>。母趾は床につけたまま。3秒キープ。',
+      'これを交互に<strong>10回</strong>繰り返す。',
+      '※ 最初は「無理！全部一緒に動く！」となる。<strong>それでOK。脳から指への神経回路を作る練習</strong>なので、意識するだけで効果がある。',
+    ],
+    feel:'足の指が<strong>バラバラに動く感覚</strong>。最初はほぼ動かないが、1-2週間で少しずつ分離してくる。',
+  },
+  {
+    name:'Psoas March（右脚）',cat:'骨盤リプログラミング',sec:45,side:'R',
+    steps:[
+      '<strong>仰向けに寝る</strong>。両膝を曲げて、股関節も膝も<strong>90°</strong>（すねが天井と平行になる位置）。',
+      '<strong>腰（腰椎）を床にぴったりつける</strong>。腰と床の間に隙間を作らない。ここが最重要。',
+      'その腰のポジションを保ったまま、<strong>右脚だけゆっくり伸ばして床に下ろす</strong>。踵が床に触れるか触れないかのところまで。',
+      '<strong>腰が床から浮きそうになったら、そこで止めて戻す</strong>。腰が浮く＝腸腰筋の限界点。',
+      'ゆっくり元の90°に戻す。これを<strong>8回</strong>。',
+    ],
+    feel:'<strong>下腹部の奥がキツい</strong>。これが腸腰筋（インナーマッスル）に効いている証拠。',
+    warn:'<strong>腰が反ったら負け</strong>。腰が浮くなら脚を完全に伸ばさなくてOK。途中で止めて戻す。腰のポジションが最優先。',
+    why:'腸腰筋の弱化が骨盤後傾の主因。「ストレッチではなく強化」が正解。',
+  },
+  {
+    name:'Psoas March（左脚）',cat:'骨盤リプログラミング',sec:45,side:'L',
+    steps:[
+      '左脚に切り替え。右脚は90°をキープ。',
+      '腰を床につけたまま、左脚をゆっくり伸ばして戻す。8回。',
+      '腰が浮きそうになったらそこで止める。',
+    ],
+  },
+  {
+    name:'片脚立ち（右脚）',cat:'バランス',sec:45,side:'R',
+    steps:[
+      '<strong>裸足で立つ</strong>。足幅は腰幅。',
+      '<strong>左足をほんの少し床から浮かせる</strong>。高く上げなくていい。2-3cmでOK。',
+      '<strong>右足だけで30秒立つ</strong>。足裏全体で床を感じる。',
+      '余裕があれば、<strong>目を閉じて追加15秒</strong>。一気に難易度が上がる。',
+      '※ ふらついたら目を開けてリセット。何度やり直してもOK。',
+    ],
+    feel:'足裏の<strong>小さな筋肉がずっと働いている</strong>感覚。プルプルしてOK。それが効いている。',
+    why:'閉眼で後傾が強まる＝視覚依存の姿勢制御。足裏の固有受容覚を鍛えると、視覚なしでも姿勢を保てるようになる。',
+  },
+  {
+    name:'片脚立ち（左脚）',cat:'バランス',sec:45,side:'L',
+    steps:[
+      '左脚に切り替え。右足を少し浮かせる。',
+      '30秒キープ。余裕があれば閉眼15秒追加。',
+    ],
+  },
+  {
+    name:'90/90呼吸',cat:'呼吸（任意）',sec:150,breathing:true,optional:true,side:'both',
+    prep:['壁の近くで仰向けに寝る','クッション or ボール（あれば）'],
+    steps:[
+      '<strong>壁に向かって仰向けに寝る</strong>。お尻を壁の近くに寄せる。',
+      '<strong>両足を壁につけて、膝と股関節を90°に曲げる</strong>。すねが床と平行になる高さ。',
+      'もしボールやクッションがあれば、<strong>膝の間に挟む</strong>（内ももに軽く力が入る）。',
+      '<strong>鼻から5秒吸う</strong>。お腹ではなく<strong>背中が床を押す</strong>感覚を探す。',
+      '<strong>鼻から5秒吐く</strong>。お腹がへこんでいく。',
+      '5呼吸（50秒）→ 10秒休み → もう5呼吸。計2セット。',
+    ],
+    feel:'背中が床を押す感覚＝<strong>横隔膜が正しく動いている証拠</strong>。腰が反らない姿勢で呼吸のパターンをリプログラミング。',
+    why:'骨盤後傾矯正＋呼吸パターンの統合。朝やれば1日の姿勢の基準点が変わる。',
+  },
+  ]
+},
+pre:{
+  title:'本番 / 稽古前',icon:'\u26A1',
+  done:'足裏→骨盤→呼吸→迷走神経。下から上にスイッチが入った。行ってこい。',
+  steps:[
+  {
+    name:'Short Foot（立位）',cat:'足裏',sec:60,side:'both',
+    steps:[
+      '<strong>立った状態で裸足</strong>（靴のままでもできる）。',
+      '足の指は床につけたまま、<strong>アーチを持ち上げる</strong>。',
+      '足裏で地面を吸盤のように吸い付く感覚。15回。',
+    ],
+    feel:'足裏のセンサーがONになって<strong>地面の感触がクリアになる</strong>。',
+  },
+  {
+    name:'片脚立ち 閉眼（右）',cat:'バランス',sec:30,side:'R',
+    steps:[
+      '目を閉じて右脚で立つ。左足を少し浮かせる。',
+      '30秒。ふらついたら目を開けてリセット。',
+    ],
+  },
+  {
+    name:'片脚立ち 閉眼（左）',cat:'バランス',sec:30,side:'L',
+    steps:['左脚に切り替え。30秒。'],
+  },
+  {
+    name:'Standing Psoas March（右）',cat:'骨盤',sec:30,side:'R',
+    steps:[
+      '立った状態で<strong>右膝を90°以上に持ち上げる</strong>。',
+      '<strong>3秒間キープ</strong>。体幹がブレないようにお腹に力を入れる。',
+      'ゆっくり下ろす。5回繰り返す。',
+    ],
+  },
+  {
+    name:'Standing Psoas March（左）',cat:'骨盤',sec:30,side:'L',
+    steps:['左脚に切り替え。5回。'],
+  },
+  {
+    name:'共鳴呼吸',cat:'呼吸',sec:120,breathing:true,side:'both',
+    steps:[
+      '立っても座ってもOK。目を閉じる。',
+      '<strong>鼻から5秒吸って、5秒吐く</strong>。2分間。',
+      '重心が<strong>下に落ちていく感覚</strong>を味わう。',
+    ],
+    feel:'体がスッと落ち着いて<strong>重心が下がる</strong>。脱力が生まれる。この状態で本番に入る。',
+  },
+  {
+    name:'冷水で顔を洗う',cat:'迷走神経',sec:30,side:'both',
+    steps:['手で水をすくって<strong>顔にバシャッ</strong>。以上。'],
+    feel:'頭がシャキッとして、でも落ち着いている。覚醒＋リラックスの理想的な状態。',
+  },
+  ]
+},
+weekly:{
+  title:'週2-3回 補強',icon:'\u{1F4AA}',
+  done:'殿筋・後脛骨筋・固有受容覚。構造的な変化はここから生まれる。',
+  steps:[
+  {
+    name:'クラムシェル（セット1）',cat:'殿筋強化',sec:60,side:'both',
+    prep:['レジスタンスバンド（中程度の強さ）'],
+    steps:[
+      '<strong>横向きに寝る</strong>。頭は腕に乗せるか枕を使う。',
+      'バンドを<strong>両膝の少し上（太もも）</strong>に巻く。',
+      '両膝を<strong>90°くらい曲げる</strong>。足は重ねておく。',
+      '<strong>足はくっつけたまま、上の膝だけ天井に向かって開く</strong>。貝殻が開くイメージ。',
+      '開ききったところで<strong>1秒止めて、ゆっくり戻す</strong>。',
+      '<strong>15回</strong>。骨盤が後ろに倒れないように注意。お腹に軽く力を入れる。',
+    ],
+    feel:'<strong>お尻の横（中殿筋）がキツくなる</strong>。太ももの前ではなくお尻に効いていればOK。',
+    warn:'骨盤が後ろに倒れると腰で代償してしまう。<strong>骨盤を壁にぴったりつけるイメージ</strong>で。',
+    why:'O脚・扁平足の上流にある殿筋の弱化を直接強化。',
+  },
+  {name:'クラムシェル（セット2）',cat:'殿筋強化',sec:60,side:'both',steps:['そのまま<strong>15回</strong>。フォームを崩さない。きつければバンドを軽くする。']},
+  {name:'クラムシェル（セット3）',cat:'殿筋強化',sec:60,side:'both',steps:['ラスト<strong>15回</strong>。最後までお尻の横に効かせる。終わったら反対側を向いて同じく3セット。']},
+  {
+    name:'ラテラルバンドウォーク（セット1）',cat:'殿筋強化',sec:60,side:'both',
+    steps:[
+      '<strong>立った状態</strong>。バンドを両膝の少し上に巻く。',
+      '膝を<strong>軽く曲げて腰を落とす</strong>（クォータースクワットくらい）。',
+      '<strong>バンドのテンションを常に保ちながら、横にサイドステップ</strong>。',
+      '一歩ずつ丁寧に。<strong>15歩</strong>。',
+      '<strong>膝が内側に入らない</strong>ように。常に膝はつま先と同じ方向。',
+    ],
+    feel:'お尻の横が<strong>ずっと燃えている</strong>感覚。',
+  },
+  {name:'ラテラルバンドウォーク（セット2）',cat:'殿筋強化',sec:60,side:'both',steps:['反対方向に<strong>15歩</strong>。']},
+  {name:'ラテラルバンドウォーク（セット3）',cat:'殿筋強化',sec:60,side:'both',steps:['もう一往復。<strong>15歩</strong>。フォーム優先。']},
+  {
+    name:'片脚ブリッジ（右脚）',cat:'殿筋強化',sec:90,side:'R',
+    steps:[
+      '<strong>仰向けに寝る</strong>。両膝を曲げて足を床につける。',
+      '<strong>左脚を天井に向けてまっすぐ伸ばす</strong>（or 膝を胸に抱える）。',
+      '右足で床を踏み、<strong>お尻を天井に向かって持ち上げる</strong>。',
+      '上で<strong>1秒止めて</strong>、ゆっくり下ろす。床にお尻がつく直前でまた上げる。',
+      '<strong>10回 × 3セット</strong>（セット間10秒休み）。',
+    ],
+    feel:'<strong>お尻がキュッと締まる</strong>感覚。腰ではなくお尻で持ち上げる。',
+    warn:'<strong>腰を反らせて持ち上げない</strong>。お尻の筋肉で上げる。腰が痛むなら両脚ブリッジからスタート。',
+  },
+  {name:'片脚ブリッジ（左脚）',cat:'殿筋強化',sec:90,side:'L',steps:['左脚に切り替え。<strong>10回×3セット</strong>。']},
+  {
+    name:'バンド内反運動',cat:'後脛骨筋',sec:180,side:'both',
+    steps:[
+      '<strong>床に座って両脚を前に伸ばす</strong>。',
+      'バンドの片端を右足に巻き、もう片端を左足や椅子の脚などに引っ掛けて<strong>外側に引っ張られるようにする</strong>。',
+      'バンドの抵抗に逆らって、<strong>足を内側＋下方向に引く</strong>（内反＋底屈）。',
+      'ゆっくり戻す。<strong>15回×3セット</strong>。',
+      '反対足も同様に。',
+    ],
+    feel:'足首の内側〜ふくらはぎの内側が<strong>じわじわ効く</strong>。',
+    why:'アーチを直接支える後脛骨筋の強化。扁平足改善の根幹。',
+  },
+  {
+    name:'カーフレイズ（内反位）',cat:'後脛骨筋',sec:180,side:'both',
+    steps:[
+      '<strong>壁に手をついて立つ</strong>。足は腰幅。',
+      '<strong>踵を内側に傾けながら</strong>つま先立ちになる（小指側ではなく親指側に体重をかけるイメージ）。',
+      '上で<strong>1秒止めて</strong>、ゆっくり下ろす。',
+      '<strong>12回×3セット</strong>。',
+    ],
+    feel:'ふくらはぎの<strong>内側</strong>が特に効く。これが後脛骨筋。',
+  },
+  {
+    name:'バランスボード',cat:'プロプリオセプション',sec:180,side:'both',
+    prep:['バランスボード（ウォブルボード型）'],
+    steps:[
+      '<strong>ボードの上に両脚で立つ</strong>。足は腰幅。',
+      '<strong>60秒×2回</strong>キープ。倒れそうになったら降りてOK。',
+      '余裕が出てきたら<strong>片脚で20秒</strong>×各脚。',
+      '※ Week 3以降: ボード上でShort Foot → 片脚閉眼15秒',
+      '※ Week 5以降: 片脚＋腕を動かす（弓を持つシミュレーション）',
+    ],
+    feel:'足裏の筋肉が<strong>常に調整し続けている</strong>感覚。',
+    why:'6週間12セッションで片脚立位安定性が有意改善 p<0.001。視覚依存→固有受容覚への移行。',
+  },
+  ]
+},
+daily:{
+  title:'日中の1分ハック',icon:'\u23F1',
+  done:'小さな介入の積み重ねが構造を変える。',
+  steps:[
+  {
+    name:'Short Foot（座ったまま）',cat:'座っている時',sec:30,side:'both',
+    steps:['靴の中でもOK。<strong>足の指を浮かせずにアーチを持ち上げる</strong>。10回。','誰にも気づかれずにできる。会議中でも。'],
+  },
+  {
+    name:'片脚立ち',cat:'信号待ち / 電車',sec:30,side:'both',
+    steps:['開眼でOK。どちらかの足を<strong>ほんの少し浮かせるだけ</strong>。','吊り革を持ちながらでもできる。'],
+  },
+  {
+    name:'共鳴呼吸 5呼吸',cat:'レッスンの合間',sec:50,breathing:true,side:'both',
+    steps:['鼻から<strong>5秒吸って5秒吐く</strong>。5回だけ。50秒。','目を閉じなくてもOK。'],
+  },
+  {
+    name:'Standing Psoas March',cat:'トイレの後',sec:30,side:'both',
+    steps:['立って<strong>膝を高く上げて3秒保持</strong>。各脚3回。','個室から出る前にサッとできる。'],
+  },
+  {
+    name:'顎セルフリリース',cat:'疲れた時',sec:60,side:'both',
+    steps:[
+      '耳の前あたり（顎関節の周り）を<strong>指で優しく円を描くようにほぐす</strong>。',
+      '<strong>口を軽く開けた状態</strong>で。上下の歯が離れているのを確認。',
+      '1分間。デスクでできる。',
+    ],
+    feel:'顎が緩むと<strong>首〜肩の力も抜ける</strong>。呼吸も自然と深くなる。',
+  },
+  ]
+},
 };
 
-// ===== STATE =====
-let currentRoutine = null;
-let currentStepIndex = 0;
-let timerInterval = null;
-let currentSubIndex = 0;
-let subTimeRemaining = 0;
-let totalTimeRemaining = 0;
-let isTimerRunning = false;
-let breatheInterval = null;
+// ===== ENGINE =====
+let rk=null,si=0,ti=null,rem=0,run=false,bi=null;
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function home(){stop();stopB();show('home')}
+function go(k){rk=k;si=0;show('exercise');render()}
 
-// ===== NAVIGATION =====
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-function goHome() {
-  stopTimer(); stopBreathe();
-  showScreen('home');
-}
-function startRoutine(key) {
-  currentRoutine = key;
-  currentStepIndex = 0;
-  showScreen('exercise');
-  renderStep();
-}
+function render(){
+  stop();stopB();
+  const r=R[rk],s=r.steps[si],t=r.steps.length;
+  document.getElementById('eHt').textContent=r.title;
+  document.getElementById('eHp').textContent=`${si+1} / ${t}`;
+  document.getElementById('ePf').style.width=`${((si+1)/t)*100}%`;
+  rem=s.sec;run=false;
 
-// ===== RENDER =====
-function renderStep() {
-  stopTimer(); stopBreathe();
-  const routine = routines[currentRoutine];
-  const step = routine.steps[currentStepIndex];
-  const total = routine.steps.length;
+  const b=document.getElementById('eB');
+  b.innerHTML='';b.scrollTop=0;
 
-  document.getElementById('exTitle').textContent = routine.title;
-  document.getElementById('exProgressText').textContent = `${currentStepIndex + 1} / ${total}`;
-  document.getElementById('exProgressFill').style.width = `${((currentStepIndex + 1) / total) * 100}%`;
+  // Header
+  let h='';
+  h+=`<div><div class="step-cat">${s.cat||''}</div><div style="display:flex;align-items:center;gap:10px;margin-top:4px"><span class="step-num">${si+1}</span><span class="step-name">${s.name}</span></div></div>`;
+  h+=`<div style="display:flex;gap:8px;flex-wrap:wrap">`;
+  h+=`<div class="step-time-badge">\u23F1 ${fmt(s.sec)}</div>`;
+  if(s.side==='R')h+=`<div class="step-side R">右側</div>`;
+  else if(s.side==='L')h+=`<div class="step-side L">左側</div>`;
+  if(s.optional)h+=`<div class="step-side both" style="background:#fbbf2412;color:#fbbf24">スキップ可</div>`;
+  h+=`</div>`;
 
-  currentSubIndex = 0;
-  totalTimeRemaining = step.totalSeconds;
-  subTimeRemaining = step.subParts[0].seconds;
-  isTimerRunning = false;
+  // Prep
+  if(s.prep){
+    h+=`<div class="prep-card"><h4>用意するもの</h4><ul class="prep-list">`;
+    s.prep.forEach(p=>h+=`<li>${p}</li>`);
+    h+=`</ul></div>`;
+  }
 
-  const body = document.getElementById('exBody');
-  body.innerHTML = '';
-  body.scrollTop = 0;
+  // Steps
+  h+=`<div class="inst-card"><div class="inst-header"><span class="icon">&#128220;</span> やり方</div><div class="inst-content"><div class="num-steps">`;
+  s.steps.forEach((st,i)=>h+=`<div class="num-step"><div class="num-circle">${i+1}</div><div class="num-text">${st}</div></div>`);
+  h+=`</div></div></div>`;
 
-  body.innerHTML += `<div class="ex-step-label">${step.label}${step.optional ? ' <span style="color:var(--warning)">(スキップ可)</span>' : ''}</div>`;
-  body.innerHTML += `<div class="ex-step-name">${step.name}</div>`;
-  body.innerHTML += `<div class="ex-duration-badge">\u23F1 ${formatTime(step.totalSeconds)}</div>`;
-
-  // Instructions
-  const details = document.createElement('details');
-  details.className = 'ex-instructions';
-  details.open = true;
-  details.innerHTML = `<summary>やり方を見る</summary><div class="inst-body">${step.howTo}${step.why ? `<div class="ex-why"><strong>なぜやるか: </strong>${step.why}</div>` : ''}</div>`;
-  body.appendChild(details);
+  // Feel
+  if(s.feel)h+=`<div class="tip-box feel"><span class="label">効いている感覚</span>${s.feel}</div>`;
+  // Warn
+  if(s.warn)h+=`<div class="tip-box warn"><span class="label">注意</span>${s.warn}</div>`;
+  // Why
+  if(s.why)h+=`<div class="tip-box why"><span class="label">なぜやるか</span>${s.why}</div>`;
 
   // Timer
-  const timerArea = document.createElement('div');
-  timerArea.className = 'timer-area';
-
-  if (step.breathing) {
-    timerArea.innerHTML = `
-      <div class="breathe-circle" id="breatheCircle">準備OK</div>
-      <div style="margin-top:16px"><div class="timer-display" id="timerDisplay">${formatTime(totalTimeRemaining)}</div></div>
-      <div class="timer-controls">
-        <button class="timer-btn primary" id="timerStartBtn" onclick="toggleTimer()">スタート</button>
-        <button class="timer-btn secondary" onclick="resetTimer()">リセット</button>
-      </div>`;
-  } else {
-    timerArea.innerHTML = `
-      <div class="timer-ring"><svg viewBox="0 0 200 200">
-        <circle class="track" cx="100" cy="100" r="90"/>
-        <circle class="progress" id="timerProgress" cx="100" cy="100" r="90"
-          stroke-dasharray="${2 * Math.PI * 90}" stroke-dashoffset="0"/>
-      </svg><div class="time-text" id="timerDisplay">${formatTime(totalTimeRemaining)}</div></div>
-      <div class="timer-controls">
-        <button class="timer-btn primary" id="timerStartBtn" onclick="toggleTimer()">スタート</button>
-        <button class="timer-btn secondary" onclick="resetTimer()">リセット</button>
-      </div>`;
+  if(s.breathing){
+    h+=`<div class="timer-card"><div class="breathe" id="bc">準備OK</div><div style="margin-top:16px"><div class="timer-num" id="td">${fmt(rem)}</div></div><div class="timer-btns"><button class="tbtn go" id="tb" onclick="tog()">スタート</button><button class="tbtn rst" onclick="rst()">リセット</button></div></div>`;
+  }else{
+    const c=2*Math.PI*85;
+    h+=`<div class="timer-card"><div class="timer-ring"><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="85"/><circle class="prg" id="tp" cx="100" cy="100" r="85" stroke-dasharray="${c}" stroke-dashoffset="0"/></svg><div class="tt"><div class="big" id="td">${fmt(rem)}</div><div class="sm" id="ts"></div></div></div><div class="timer-btns"><button class="tbtn go" id="tb" onclick="tog()">スタート</button><button class="tbtn rst" onclick="rst()">リセット</button></div></div>`;
   }
 
-  if (step.subParts.length > 1) {
-    let subHtml = '<div class="sub-timer-list" id="subTimerList">';
-    step.subParts.forEach((sp, i) => {
-      subHtml += `<div class="sub-timer-item ${i === 0 ? 'active' : ''}" id="sub-${i}">
-        <span class="sub-name">${sp.name}</span>
-        <span class="sub-time">${formatTime(sp.seconds)}</span></div>`;
-    });
-    subHtml += '</div>';
-    timerArea.innerHTML += subHtml;
-  }
-  body.appendChild(timerArea);
+  b.innerHTML=h;
 
   // Nav
-  const nav = document.getElementById('exNav');
-  const isFirst = currentStepIndex === 0;
-  const isLast = currentStepIndex === total - 1;
-  let navHtml = '';
-  if (!isFirst) {
-    navHtml += `<button class="nav-btn prev" onclick="prevStep()">&larr; 戻る</button>`;
-  }
-  if (step.optional) {
-    navHtml += `<button class="nav-btn skip" onclick="nextStep()">スキップ</button>`;
-  }
-  navHtml += `<button class="nav-btn ${isLast ? 'finish' : 'next'}" onclick="nextStep()">${isLast ? '完了' : '次へ &rarr;'}</button>`;
-  nav.innerHTML = navHtml;
+  const n=document.getElementById('eN');
+  let nv='';
+  if(si>0)nv+=`<button class="nbtn prev" onclick="prev()">&larr; 戻る</button>`;
+  if(s.optional)nv+=`<button class="nbtn skip" onclick="next()">スキップ</button>`;
+  nv+=`<button class="nbtn ${si===t-1?'fin':'next'}" onclick="next()">${si===t-1?'完了':'次へ &rarr;'}</button>`;
+  n.innerHTML=nv;
 }
 
-// ===== TIMER =====
-function toggleTimer() {
-  if (isTimerRunning) pauseTimer(); else startTimer();
+function tog(){run?pause():start()}
+function start(){
+  run=true;
+  const btn=document.getElementById('tb');if(btn)btn.textContent='一時停止';
+  const s=R[rk].steps[si];
+  if(s.breathing)startB();
+  ti=setInterval(()=>{
+    rem--;upd();
+    if(rem<=0){stop();stopB();if(navigator.vibrate)navigator.vibrate([200,100,200]);const b=document.getElementById('tb');if(b){b.textContent='完了!';b.disabled=true}}
+  },1000);
 }
-function startTimer() {
-  isTimerRunning = true;
-  const btn = document.getElementById('timerStartBtn');
-  if (btn) btn.textContent = '一時停止';
-  const step = routines[currentRoutine].steps[currentStepIndex];
-  if (step.breathing) startBreathe();
-
-  timerInterval = setInterval(() => {
-    subTimeRemaining--;
-    totalTimeRemaining--;
-    updateTimerDisplay();
-
-    if (subTimeRemaining <= 0) {
-      const subEl = document.getElementById(`sub-${currentSubIndex}`);
-      if (subEl) { subEl.classList.remove('active'); subEl.classList.add('done'); }
-      currentSubIndex++;
-      if (currentSubIndex < step.subParts.length) {
-        subTimeRemaining = step.subParts[currentSubIndex].seconds;
-        const nextSubEl = document.getElementById(`sub-${currentSubIndex}`);
-        if (nextSubEl) nextSubEl.classList.add('active');
-        if (navigator.vibrate) navigator.vibrate(100);
-      }
-    }
-    if (totalTimeRemaining <= 0) {
-      stopTimer(); stopBreathe();
-      if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
-      const btn = document.getElementById('timerStartBtn');
-      if (btn) { btn.textContent = '完了!'; btn.disabled = true; }
-    }
-  }, 1000);
-}
-function pauseTimer() {
-  isTimerRunning = false;
-  clearInterval(timerInterval);
-  stopBreathe();
-  const btn = document.getElementById('timerStartBtn');
-  if (btn) btn.textContent = '再開';
-}
-function stopTimer() {
-  isTimerRunning = false;
-  clearInterval(timerInterval);
-  timerInterval = null;
-}
-function resetTimer() {
-  stopTimer(); stopBreathe();
-  const step = routines[currentRoutine].steps[currentStepIndex];
-  currentSubIndex = 0;
-  totalTimeRemaining = step.totalSeconds;
-  subTimeRemaining = step.subParts[0].seconds;
-  updateTimerDisplay();
-  const btn = document.getElementById('timerStartBtn');
-  if (btn) { btn.textContent = 'スタート'; btn.disabled = false; }
-  step.subParts.forEach((_, i) => {
-    const el = document.getElementById(`sub-${i}`);
-    if (el) el.classList.remove('active', 'done');
-  });
-  const first = document.getElementById('sub-0');
-  if (first) first.classList.add('active');
-}
-function updateTimerDisplay() {
-  const display = document.getElementById('timerDisplay');
-  if (display) display.textContent = formatTime(totalTimeRemaining);
-  const step = routines[currentRoutine].steps[currentStepIndex];
-  const progress = document.getElementById('timerProgress');
-  if (progress) {
-    const c = 2 * Math.PI * 90;
-    progress.style.strokeDashoffset = c * (totalTimeRemaining / step.totalSeconds);
-  }
-  const subTimeEl = document.querySelector(`#sub-${currentSubIndex} .sub-time`);
-  if (subTimeEl) subTimeEl.textContent = formatTime(subTimeRemaining);
+function pause(){run=false;clearInterval(ti);stopB();const b=document.getElementById('tb');if(b)b.textContent='再開'}
+function stop(){run=false;clearInterval(ti);ti=null}
+function rst(){stop();stopB();const s=R[rk].steps[si];rem=s.sec;upd();const b=document.getElementById('tb');if(b){b.textContent='スタート';b.disabled=false}}
+function upd(){
+  const d=document.getElementById('td');if(d)d.textContent=fmt(rem);
+  const s=R[rk].steps[si];
+  const p=document.getElementById('tp');
+  if(p){const c=2*Math.PI*85;p.style.strokeDashoffset=c*(rem/s.sec)}
 }
 
-// ===== BREATHING =====
-function startBreathe() {
-  const circle = document.getElementById('breatheCircle');
-  if (!circle) return;
-  let phase = 'inhale';
-  circle.className = 'breathe-circle inhale';
-  circle.textContent = '吸う';
-  breatheInterval = setInterval(() => {
-    if (phase === 'inhale') {
-      phase = 'exhale';
-      circle.className = 'breathe-circle exhale';
-      circle.textContent = '吐く';
-    } else {
-      phase = 'inhale';
-      circle.className = 'breathe-circle inhale';
-      circle.textContent = '吸う';
-    }
-  }, 5000);
+function startB(){
+  const c=document.getElementById('bc');if(!c)return;
+  let ph='in';c.className='breathe in';c.textContent='吸う';
+  bi=setInterval(()=>{
+    if(ph==='in'){ph='out';c.className='breathe out';c.textContent='吐く'}
+    else{ph='in';c.className='breathe in';c.textContent='吸う'}
+  },5000);
 }
-function stopBreathe() {
-  clearInterval(breatheInterval);
-  breatheInterval = null;
-}
+function stopB(){clearInterval(bi);bi=null}
 
-// ===== NAV =====
-function prevStep() {
-  if (currentStepIndex > 0) {
-    stopTimer(); stopBreathe();
-    currentStepIndex--;
-    renderStep();
-  }
-}
-function nextStep() {
-  stopTimer(); stopBreathe();
-  const routine = routines[currentRoutine];
-  currentStepIndex++;
-  if (currentStepIndex >= routine.steps.length) showComplete();
-  else renderStep();
-}
-function showComplete() {
-  const routine = routines[currentRoutine];
-  document.getElementById('completeIcon').textContent = routine.icon;
-  document.getElementById('completeTitle').textContent = `${routine.title} 完了`;
-  document.getElementById('completeMsg').textContent = routine.completeMsg;
-  showScreen('complete');
-}
-
-// ===== UTILS =====
-function formatTime(s) {
-  if (s < 0) s = 0;
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-}
+function prev(){if(si>0){stop();stopB();si--;render()}}
+function next(){stop();stopB();si++;if(si>=R[rk].steps.length){document.getElementById('cI').textContent=R[rk].icon;document.getElementById('cT').textContent=R[rk].title+' 完了';document.getElementById('cM').textContent=R[rk].done;show('complete')}else render()}
+function fmt(s){if(s<0)s=0;return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 </script>
 </body>
 </html>
