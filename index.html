@@ -200,6 +200,16 @@ body{
 .breathe.in{transform:scale(1.35);opacity:1}
 .breathe.out{transform:scale(.75);opacity:.5}
 
+/* Pose diagram */
+.pose-box{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:12px;padding:16px;text-align:center;
+}
+.pose-box .pose-label{font-size:11px;color:var(--text3);margin-top:8px;font-weight:600}
+.pose-box svg{max-width:100%;height:auto}
+.pose-row{display:flex;gap:12px}
+.pose-row .pose-box{flex:1}
+
 /* Nav */
 .ex-nav{
   padding:12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -367,25 +377,28 @@ night:{
   {
     name:'90/90ヒップストレッチ（右前）',cat:'ストレッチ',sec:30,side:'R',
     prep:['床に座る（マットがあればベスト）'],
+    diagram:`<div class="pose-row"><div class="pose-box"><svg viewBox="0 0 200 160" width="200"><text x="100" y="12" text-anchor="middle" fill="#71717a" font-size="10">▼ 上から見た図</text><circle cx="100" cy="50" r="14" fill="#818cf8" opacity=".3" stroke="#818cf8" stroke-width="1.5"/><text x="100" y="54" text-anchor="middle" fill="#fafafa" font-size="9" font-weight="700">体</text><line x1="100" y1="64" x2="60" y2="90" stroke="#f87171" stroke-width="3" stroke-linecap="round"/><line x1="60" y1="90" x2="60" y2="130" stroke="#f87171" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="90" r="4" fill="#f87171"/><text x="50" y="88" text-anchor="end" fill="#f87171" font-size="9">右膝</text><text x="50" y="138" text-anchor="end" fill="#f87171" font-size="8">右足</text><text x="73" y="128" fill="#f87171" font-size="8">90°</text><line x1="100" y1="64" x2="140" y2="90" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/><line x1="140" y1="90" x2="170" y2="90" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/><circle cx="140" cy="90" r="4" fill="#60a5fa"/><text x="150" y="84" fill="#60a5fa" font-size="9">左膝</text><text x="172" y="84" fill="#60a5fa" font-size="8">左足</text><text x="152" y="100" fill="#60a5fa" font-size="8">90°</text><text x="100" y="155" text-anchor="middle" fill="#a1a1aa" font-size="9">← 正面 →</text></svg><div class="pose-label">完成ポジション</div></div></div>`,
     steps:[
-      '<strong>床に座る</strong>。右脚を前に出して、<strong>膝を90°に曲げる</strong>。右のすねが自分の体の正面に来るように（体と平行）。',
-      '左脚は<strong>体の左側に開いて、膝を90°に曲げる</strong>。左のすねは体と垂直に、後ろを向く。',
-      '上から見ると<strong>両脚でカタカナの「ヒ」の字</strong>を描く形になる。',
-      '背筋を伸ばしたまま、<strong>おへそを右すねに近づけるように上体を前に倒す</strong>。',
-      '<strong>右のお尻の外側〜股関節の前面</strong>にストレッチ感が出ればOK。無理に深く倒さなくていい。',
-      '呼吸は止めず、吐くたびに少しだけ深く倒れる。',
+      '<strong>まず体育座り</strong>をする（膝を曲げて両足を床につけた状態で座る）。',
+      'そこから<strong>両膝をバタンと右側に倒す</strong>。ワイパーのように。',
+      'すると<strong>右すねが体の正面</strong>（横向き）に、<strong>左すねが体の左横</strong>（後ろ向き）に倒れる。',
+      'このとき<strong>右膝も左膝も「くの字」に約90°曲がっている</strong>のを確認。これが「90/90」の意味。',
+      '上の図のような形になっていればOK。ならなくても近ければ大丈夫。',
+      '背筋を伸ばして、<strong>おへそを右すねに向かって近づけるように前に倒す</strong>。手は前の床についてOK。',
+      '<strong>右のお尻の外側がじわーっと伸びる</strong>のを感じたら正解。30秒キープ。',
+      '吐くたびに少しだけ深く。<strong>無理に深く倒れなくていい</strong>。浅くても効いている。',
     ],
-    feel:'右のお尻の横〜奥に<strong>じわっと伸びる感覚</strong>。痛みではなく「伸びている」感じ。',
-    warn:'膝に痛みが出たら角度を緩める。<strong>股関節に痛みがある場合は無理せず浅い角度で</strong>。後ろ脚の膝が浮いてもOK。',
+    feel:'右のお尻の横〜奥に<strong>じわっと伸びる感覚</strong>。「痛い」ではなく「伸びてる〜」という感じ。',
+    warn:'<strong>膝に痛みが出たら角度を浅くする</strong>。股関節が硬くてこの姿勢がキツい場合は、お尻の下にクッションを敷くと楽になる。後ろ脚の膝が浮いてもOK。完璧な形を目指す必要はない。',
     why:'股関節の内旋・外旋可動域を同時に改善。骨盤の動きを正常化する。',
   },
   {
     name:'90/90ヒップストレッチ（左前）',cat:'ストレッチ',sec:30,side:'L',
     steps:[
-      '脚を入れ替える。<strong>左脚を前（すねが正面）、右脚を後ろ</strong>に。',
-      '同じく膝はどちらも90°。上から見て「ヒ」の字の左右反転。',
-      '背筋を伸ばして、おへそを左すねに近づけるように前に倒す。',
-      '左のお尻外側のストレッチ感を確認。吐くたびに少し深く。',
+      'さっきの体勢から、<strong>両膝を反対側（左側）にバタンと倒す</strong>。',
+      '今度は<strong>左すねが正面、右すねが右横</strong>にくる。さっきの左右反転。',
+      '背筋を伸ばして、おへそを左すねに向かって前に倒す。',
+      '左のお尻外側のストレッチ感を確認。吐くたびに少し深く。30秒。',
     ],
   },
   {
@@ -411,13 +424,14 @@ night:{
   },
   {
     name:'スパイナルツイスト（右）',cat:'ストレッチ',sec:30,side:'R',
+    diagram:`<div class="pose-box"><svg viewBox="0 0 240 100" width="240"><text x="120" y="12" text-anchor="middle" fill="#71717a" font-size="10">▼ 正面から見た図</text><line x1="120" y1="50" x2="120" y2="85" stroke="#818cf8" stroke-width="2.5"/><circle cx="120" cy="40" r="10" fill="#818cf8" opacity=".3" stroke="#818cf8" stroke-width="1.5"/><line x1="120" y1="50" x2="60" y2="50" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/><line x1="120" y1="50" x2="180" y2="50" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/><text x="55" y="45" text-anchor="end" fill="#a1a1aa" font-size="8">右手→</text><text x="185" y="45" fill="#a1a1aa" font-size="8">←左手</text><text x="120" y="35" text-anchor="middle" fill="#a1a1aa" font-size="8">顔→右</text><line x1="120" y1="85" x2="80" y2="85" stroke="#f87171" stroke-width="3" stroke-linecap="round"/><line x1="80" y1="85" x2="80" y2="65" stroke="#f87171" stroke-width="3" stroke-linecap="round"/><circle cx="80" cy="85" r="3" fill="#f87171"/><text x="70" y="62" fill="#f87171" font-size="8">右膝↑</text><text x="80" y="98" text-anchor="middle" fill="#f87171" font-size="8">←左に倒す</text></svg><div class="pose-label">仰向け・腕はT字・右膝を左に倒す</div></div>`,
     steps:[
-      '<strong>仰向けに寝る</strong>。両腕を真横にT字に広げる。',
-      '<strong>右膝を曲げて胸に近づけ</strong>、そのまま<strong>左手で右膝を持って左側（床の方向）に倒す</strong>。',
-      '<strong>右の肩は床につけたまま</strong>。肩が浮いてしまうなら、膝を倒す角度を浅くする。',
-      '顔は<strong>右（膝と反対方向）を向く</strong>。',
-      '腰〜背中全体が<strong>ねじれてストレッチされる</strong>のを感じる。',
-      '吐くたびに力を抜いて、膝が床に近づいていく。無理に押し込まない。',
+      '<strong>仰向けに寝る</strong>。両腕を真横にT字に広げる（十字架のポーズ）。',
+      '<strong>右膝を曲げて胸に近づける</strong>。左脚はまっすぐ伸ばしたまま。',
+      '<strong>左手で右膝の外側を持って、右膝を左側（床の方向）にゆっくり倒す</strong>。',
+      'ポイント：<strong>右の肩は床から離さない</strong>。肩が浮きそうなら、膝を倒す角度を浅くしてOK。',
+      '顔は<strong>右（膝と反対方向）</strong>を向く。',
+      '腰〜背中が<strong>雑巾をしぼるようにねじれる</strong>のを感じる。吐くたびに力を抜いて膝が床に近づいていく。',
     ],
     feel:'腰まわり〜背中に<strong>気持ちいいねじれ感</strong>。お腹の内臓がマッサージされるような感覚。',
     warn:'<strong>肩が浮かないことが最優先</strong>。膝が床につかなくても全然OK。',
@@ -433,14 +447,16 @@ night:{
   },
   {
     name:'チャイルドポーズ',cat:'ストレッチ',sec:60,side:'both',
+    diagram:`<div class="pose-box"><svg viewBox="0 0 220 90" width="220"><text x="110" y="12" text-anchor="middle" fill="#71717a" font-size="10">▼ 横から見た図</text><ellipse cx="130" cy="45" rx="22" ry="18" fill="#818cf8" opacity=".2" stroke="#818cf8" stroke-width="1.5" transform="rotate(-20,130,45)"/><text x="130" y="49" text-anchor="middle" fill="#a1a1aa" font-size="8">背中</text><line x1="145" y1="55" x2="155" y2="72" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><line x1="155" y1="72" x2="145" y2="80" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><text x="162" y="76" fill="#a1a1aa" font-size="7">踵にお尻</text><line x1="112" y1="38" x2="80" y2="42" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/><line x1="80" y1="42" x2="50" y2="42" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/><text x="48" y="38" text-anchor="end" fill="#a1a1aa" font-size="7">腕を前に</text><circle cx="108" cy="35" r="8" fill="#818cf8" opacity=".3" stroke="#818cf8" stroke-width="1.5"/><text x="108" y="38" text-anchor="middle" fill="#a1a1aa" font-size="7">頭</text><text x="108" y="52" text-anchor="middle" fill="#a1a1aa" font-size="7">↓額を床に</text><line x1="50" y1="82" x2="200" y2="82" stroke="#27272a" stroke-width="1" stroke-dasharray="4"/><text x="200" y="80" fill="#71717a" font-size="7">床</text></svg><div class="pose-label">正座→前に倒れる→額を床に</div></div>`,
     steps:[
-      '<strong>正座</strong>する（膝を曲げてお尻を踵に乗せる）。',
-      '膝を<strong>腰幅〜肩幅くらいに開く</strong>。つま先は合わせたまま。',
-      '<strong>両手を前に伸ばしながら、上体を前に倒す</strong>。額を床（またはマット）につける。',
-      'お尻は踵に乗せたまま。<strong>浮いてもOK</strong>だが、できるだけ踵に近づける意識。',
-      '両腕は前に伸ばす or 体の横に置いてもOK（楽な方で）。',
-      '<strong>鼻からゆっくり吸い、背中が風船のように膨らむ</strong>のを意識する。横・後ろに広がる感じ。',
-      '吐くときは<strong>全身の力を抜いて床に溶けていく</strong>イメージ。60秒間。',
+      '<strong>正座</strong>する。お尻を踵の上に乗せる。',
+      '<strong>膝を腰幅〜肩幅くらいに開く</strong>。つま先同士はくっつけたまま。',
+      'そのまま<strong>手を前に這わせながら、上体をゆっくり前に倒す</strong>。',
+      '<strong>額を床につける</strong>。つかなければ拳を重ねてその上に額を置く。',
+      'お尻はできるだけ踵の上にキープ。浮いてもOK。',
+      '腕は<strong>前にまっすぐ伸ばす</strong>（楽なら体の横でもOK）。',
+      '鼻からゆっくり吸う。<strong>背中が風船のように「後ろと横に」膨らむ</strong>のを意識。胸ではなく背中で呼吸する感覚。',
+      '吐くときは<strong>全身の力を抜いて、床に溶けていく</strong>イメージ。60秒間。',
     ],
     feel:'背中全体が<strong>360°広がる感覚</strong>。お腹が太ももに押されて、内臓がマッサージされる安心感。',
     warn:'膝に痛みがあるなら正座を浅くする。額が床につかなければ拳を重ねてその上に額を置く。',
@@ -464,14 +480,15 @@ night:{
   // ── 共鳴呼吸 ──
   {
     name:'共鳴呼吸',cat:'呼吸（核心）',sec:300,breathing:true,side:'both',
+    diagram:`<div class="pose-box"><svg viewBox="0 0 240 60" width="240"><rect x="30" y="30" width="180" height="20" rx="10" fill="#818cf8" opacity=".15" stroke="#818cf8" stroke-width="1.5"/><circle cx="50" cy="40" r="8" fill="#818cf8" opacity=".3" stroke="#818cf8" stroke-width="1"/><text x="50" y="43" text-anchor="middle" fill="#a1a1aa" font-size="7">頭</text><text x="130" y="44" text-anchor="middle" fill="#a1a1aa" font-size="8">仰向け</text><text x="130" y="22" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="700">5秒吸う → 5秒吐く</text><line x1="30" y1="52" x2="210" y2="52" stroke="#27272a" stroke-width="1" stroke-dasharray="4"/></svg><div class="pose-label">仰向け・鼻呼吸・1呼吸10秒 = 毎分6回</div></div>`,
     steps:[
       '<strong>仰向けに寝る</strong>。枕は使っても使わなくてもOK。',
-      '目を閉じる。両手はお腹の上か、体の横に。',
-      '<strong>鼻から5秒かけてゆっくり吸う</strong>。お腹が膨らむのを手で感じる。',
-      '<strong>鼻から5秒かけてゆっくり吐く</strong>。お腹がへこんでいく。',
-      'これを繰り返す。<strong>1呼吸10秒 = 毎分6回</strong>。',
-      '慣れてきたら、吐き終わった後に<strong>2秒止める</strong>（A52法: 5秒吸い→5秒吐き→2秒止め）。',
-      '<strong>苦しくならないペース</strong>で。楽にできれば効果的。そのまま寝落ちOK。',
+      '目を閉じる。<strong>両手はお腹の上に置く</strong>（膨らみ・へこみを感じるため）。',
+      '<strong>鼻から5秒かけてゆっくり吸う</strong>。お腹が手を押し上げるのを感じる。胸ではなくお腹。',
+      '<strong>鼻から5秒かけてゆっくり吐く</strong>。お腹がゆっくりへこんでいく。',
+      'これを繰り返す。<strong>1呼吸10秒 = 毎分6回</strong>。上の呼吸アニメーションに合わせてもOK。',
+      '慣れてきたら、吐き終わった後に<strong>2秒止める</strong>（5秒吸い→5秒吐き→2秒止め）。',
+      '<strong>苦しかったら4秒吸い→4秒吐きに短縮</strong>してOK。楽にできることが最優先。そのまま寝落ちOK。',
     ],
     feel:'3分くらいで<strong>体が重くなり、手足が温かくなる</strong>。心拍が落ち着いてくるのがわかる。',
     warn:'<strong>苦しいのに頑張り続けない</strong>。苦しかったら4秒吸い→4秒吐きに短くしてOK。無意識下でストレスを溜める方が有害。',
@@ -542,12 +559,13 @@ morning:{
   },
   {
     name:'股関節の回旋（右脚）',cat:'CARs',sec:40,side:'R',
+    diagram:`<div class="pose-box"><svg viewBox="0 0 160 120" width="150"><text x="80" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ 正面から見た図</text><line x1="80" y1="40" x2="80" y2="75" stroke="#818cf8" stroke-width="2.5"/><circle cx="80" cy="32" r="8" fill="#818cf8" opacity=".3" stroke="#818cf8" stroke-width="1.5"/><line x1="80" y1="75" x2="80" y2="110" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><text x="80" y="118" text-anchor="middle" fill="#a1a1aa" font-size="7">左脚（軸）</text><line x1="80" y1="75" x2="110" y2="55" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/><circle cx="110" cy="55" r="3" fill="#f87171"/><path d="M110,45 Q130,55 120,75 Q110,95 90,90" fill="none" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4"/><text x="135" y="65" fill="#f87171" font-size="8">大きく回す</text><text x="25" y="65" fill="#a1a1aa" font-size="7">壁に手→</text><line x1="40" y1="55" x2="60" y2="55" stroke="#a1a1aa" stroke-width="1.5" stroke-linecap="round"/></svg><div class="pose-label">膝を上げて大きく円を描く</div></div>`,
     steps:[
-      '<strong>壁や椅子に手をついて片脚立ち</strong>になる。',
+      '<strong>壁や椅子に左手をついて、左脚で立つ</strong>。',
       '<strong>右膝を胸の高さまで持ち上げる</strong>。',
-      'そのまま<strong>膝を外側に開き → 後ろに回し → 下ろす</strong>。大きな円を描く。',
+      'そのまま<strong>膝を外側に開いて → 後ろに回して → 下ろす</strong>。上の図のように大きな円を描く。',
       '時計回り3回 → 反時計回り3回。',
-      '<strong>体幹は揺らさない</strong>。動くのは股関節だけ。',
+      '<strong>体幹（上半身）は揺らさない</strong>。動くのは股関節だけ。上半身が一緒に動いたらそれは「股関節が動いていない」証拠。',
     ],
     feel:'股関節の前側〜横で<strong>引っかかる箇所</strong>があるはず。そこをゆっくり通す。',
   },
@@ -574,14 +592,15 @@ morning:{
   },
   {
     name:'Short Foot Exercise',cat:'足部リプログラミング',sec:60,side:'both',
+    diagram:`<div class="pose-row"><div class="pose-box"><svg viewBox="0 0 120 100" width="110"><text x="60" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ 普通の足</text><path d="M35,80 Q35,40 45,30 Q55,25 65,25 Q80,25 85,35 Q90,45 90,80" fill="none" stroke="#71717a" stroke-width="2"/><line x1="35" y1="80" x2="90" y2="80" stroke="#71717a" stroke-width="2"/><path d="M45,80 Q60,75 75,80" fill="none" stroke="#71717a" stroke-width="1.5" stroke-dasharray="3"/><text x="60" y="70" text-anchor="middle" fill="#71717a" font-size="8">アーチ低い</text></svg><div class="pose-label">Before</div></div><div class="pose-box"><svg viewBox="0 0 120 100" width="110"><text x="60" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ Short Foot</text><path d="M40,80 Q38,38 48,28 Q58,23 68,23 Q82,23 86,33 Q88,43 85,80" fill="none" stroke="#4ade80" stroke-width="2.5"/><line x1="40" y1="80" x2="85" y2="80" stroke="#4ade80" stroke-width="2"/><path d="M48,80 Q62,55 78,80" fill="none" stroke="#4ade80" stroke-width="2"/><text x="62" y="65" text-anchor="middle" fill="#4ade80" font-size="8" font-weight="700">アーチUP!</text><text x="62" y="95" text-anchor="middle" fill="#fbbf24" font-size="8">※指は浮かさない</text></svg><div class="pose-label">After</div></div></div>`,
     steps:[
       '<strong>椅子に座って裸足</strong>になる。両足を床に平らにつける。',
-      '<strong>足の指は床につけたまま</strong>、浮かせない。これが絶対ルール。',
-      '足の指の付け根（母趾球と小趾球）を<strong>踵に引き寄せるように、足裏を縮める</strong>。',
-      'するとアーチ（土踏まず）が<strong>グッと持ち上がる</strong>。',
-      '<strong>「地面を足裏で掴む」</strong>感覚。握るのではなく、吸盤のように吸い付く感じ。',
-      '3秒キープ → 緩める。これを<strong>15回</strong>。',
-      '※ 最初は「全然動かない！」と感じるかもしれない。<strong>意識して力を入れるだけでも効果あり</strong>。続ければ動くようになる。',
+      '★絶対ルール★ <strong>足の指は5本とも床につけたまま。浮かせない</strong>。',
+      'イメージ：<strong>足の指の付け根と踵を近づけるように、足裏を「縮める」</strong>。',
+      'すると土踏まず（アーチ）が<strong>グッと持ち上がる</strong>。上の図の右側の形。',
+      '感覚としては<strong>「足裏で床を吸盤のように吸い付く」</strong>。指で掴むのではない。',
+      '3秒キープ → 力を抜く。これを<strong>15回</strong>。',
+      '※ 最初は「全然動かない！何も起きない！」となるのが普通。<strong>意識して力を入れるだけでOK</strong>。1週間で動き始める。',
     ],
     feel:'土踏まずが<strong>ピクッと持ち上がる</strong>感覚。最初は微妙でも、1週間で明確に動くようになる。',
     warn:'<strong>指を丸めて掴むのはNG</strong>。指は伸ばしたまま床についている。動くのは「アーチ」だけ。',
@@ -600,12 +619,15 @@ morning:{
   },
   {
     name:'Psoas March（右脚）',cat:'骨盤リプログラミング',sec:45,side:'R',
+    diagram:`<div class="pose-row"><div class="pose-box"><svg viewBox="0 0 160 110" width="140"><text x="80" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ スタート</text><rect x="30" y="55" width="90" height="14" rx="7" fill="#818cf8" opacity=".15" stroke="#818cf8" stroke-width="1.5"/><circle cx="40" cy="62" r="7" fill="#818cf8" opacity=".3"/><line x1="120" y1="55" x2="135" y2="30" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><line x1="135" y1="30" x2="120" y2="20" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><line x1="120" y1="55" x2="135" y2="30" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" opacity=".5"/><text x="140" y="28" fill="#a1a1aa" font-size="7">90°</text><text x="75" y="80" text-anchor="middle" fill="#a1a1aa" font-size="8">腰を床にぴったり</text><line x1="30" y1="70" x2="130" y2="70" stroke="#27272a" stroke-width="1" stroke-dasharray="3"/></svg><div class="pose-label">両脚90°</div></div><div class="pose-box"><svg viewBox="0 0 160 110" width="140"><text x="80" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ 片脚を伸ばす</text><rect x="30" y="55" width="90" height="14" rx="7" fill="#818cf8" opacity=".15" stroke="#818cf8" stroke-width="1.5"/><circle cx="40" cy="62" r="7" fill="#818cf8" opacity=".3"/><line x1="120" y1="55" x2="135" y2="30" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><line x1="135" y1="30" x2="120" y2="20" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><line x1="120" y1="62" x2="155" y2="68" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/><text x="145" y="80" fill="#f87171" font-size="7">伸ばす→</text><text x="75" y="80" text-anchor="middle" fill="#fbbf24" font-size="8">腰は浮かさない！</text><line x1="30" y1="70" x2="130" y2="70" stroke="#27272a" stroke-width="1" stroke-dasharray="3"/></svg><div class="pose-label">右脚だけ伸ばして戻す</div></div></div>`,
     steps:[
-      '<strong>仰向けに寝る</strong>。両膝を曲げて、股関節も膝も<strong>90°</strong>（すねが天井と平行になる位置）。',
-      '<strong>腰（腰椎）を床にぴったりつける</strong>。腰と床の間に隙間を作らない。ここが最重要。',
-      'その腰のポジションを保ったまま、<strong>右脚だけゆっくり伸ばして床に下ろす</strong>。踵が床に触れるか触れないかのところまで。',
-      '<strong>腰が床から浮きそうになったら、そこで止めて戻す</strong>。腰が浮く＝腸腰筋の限界点。',
-      'ゆっくり元の90°に戻す。これを<strong>8回</strong>。',
+      '<strong>仰向けに寝る</strong>。',
+      '両膝を曲げて持ち上げ、<strong>すねが天井と平行</strong>になる位置にする（股関節90°・膝90°）。上の図の左側の形。',
+      '★最重要★ <strong>腰（腰椎）を床にぴったりつける</strong>。腰と床の間に手が入らないくらいベタッと。',
+      'その腰のポジションを保ったまま、<strong>右脚だけゆっくり伸ばして床に下ろす</strong>。上の図の右側の形。',
+      '<strong>踵が床に触れるか触れないかのところまで下ろしたら、ゆっくり戻す</strong>。',
+      '途中で<strong>腰が床から浮きそうになったら、そこが限界点</strong>。完全に伸ばせなくてOK。そこで止めて戻す。',
+      'これを<strong>8回</strong>。左脚は90°をキープしたまま。',
     ],
     feel:'<strong>下腹部の奥がキツい</strong>。これが腸腰筋（インナーマッスル）に効いている証拠。',
     warn:'<strong>腰が反ったら負け</strong>。腰が浮くなら脚を完全に伸ばさなくてOK。途中で止めて戻す。腰のポジションが最優先。',
@@ -713,13 +735,14 @@ weekly:{
   {
     name:'クラムシェル（セット1）',cat:'殿筋強化',sec:60,side:'both',
     prep:['レジスタンスバンド（中程度の強さ）'],
+    diagram:`<div class="pose-row"><div class="pose-box"><svg viewBox="0 0 130 100" width="120"><text x="65" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ 閉じた状態</text><ellipse cx="45" cy="50" rx="18" ry="12" fill="#818cf8" opacity=".2" stroke="#818cf8" stroke-width="1.5"/><line x1="60" y1="50" x2="90" y2="65" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><line x1="90" y1="65" x2="90" y2="85" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><line x1="60" y1="55" x2="90" y2="70" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><line x1="90" y1="70" x2="90" y2="90" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><circle cx="90" cy="65" r="3" fill="#818cf8"/></svg><div class="pose-label">閉じ</div></div><div class="pose-box"><svg viewBox="0 0 130 100" width="120"><text x="65" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ 開いた状態</text><ellipse cx="45" cy="50" rx="18" ry="12" fill="#818cf8" opacity=".2" stroke="#818cf8" stroke-width="1.5"/><line x1="60" y1="50" x2="90" y2="35" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"/><line x1="90" y1="35" x2="90" y2="55" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"/><line x1="60" y1="55" x2="90" y2="70" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><line x1="90" y1="70" x2="90" y2="90" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" opacity=".4"/><circle cx="90" cy="35" r="3" fill="#4ade80"/><text x="97" y="35" fill="#4ade80" font-size="8">膝を開く↑</text><text x="90" y="98" text-anchor="middle" fill="#fbbf24" font-size="7">足はくっつけたまま</text></svg><div class="pose-label">開き（貝殻）</div></div></div>`,
     steps:[
-      '<strong>横向きに寝る</strong>。頭は腕に乗せるか枕を使う。',
-      'バンドを<strong>両膝の少し上（太もも）</strong>に巻く。',
-      '両膝を<strong>90°くらい曲げる</strong>。足は重ねておく。',
-      '<strong>足はくっつけたまま、上の膝だけ天井に向かって開く</strong>。貝殻が開くイメージ。',
-      '開ききったところで<strong>1秒止めて、ゆっくり戻す</strong>。',
-      '<strong>15回</strong>。骨盤が後ろに倒れないように注意。お腹に軽く力を入れる。',
+      '<strong>横向きに寝る</strong>。頭は下の腕に乗せるか枕を使う。',
+      'バンドを<strong>両膝の少し上（太もも）</strong>に巻く。バンドなしでもOK。',
+      '両膝を<strong>90°くらい曲げる</strong>。<strong>両足の裏はくっつけておく</strong>。',
+      '<strong>足は離さずに、上の膝だけ天井に向かってパカッと開く</strong>。貝殻が開くイメージ。上の図の右側。',
+      '開ききったところで<strong>1秒止めて、ゆっくり閉じる</strong>。',
+      '<strong>15回</strong>。骨盤が後ろに倒れないように。壁にお尻をつけてやると安定する。',
     ],
     feel:'<strong>お尻の横（中殿筋）がキツくなる</strong>。太ももの前ではなくお尻に効いていればOK。',
     warn:'骨盤が後ろに倒れると腰で代償してしまう。<strong>骨盤を壁にぴったりつけるイメージ</strong>で。',
@@ -742,12 +765,14 @@ weekly:{
   {name:'ラテラルバンドウォーク（セット3）',cat:'殿筋強化',sec:60,side:'both',steps:['もう一往復。<strong>15歩</strong>。フォーム優先。']},
   {
     name:'片脚ブリッジ（右脚）',cat:'殿筋強化',sec:90,side:'R',
+    diagram:`<div class="pose-row"><div class="pose-box"><svg viewBox="0 0 180 90" width="170"><text x="90" y="12" text-anchor="middle" fill="#71717a" font-size="9">▼ 横から見た図</text><line x1="30" y1="65" x2="110" y2="65" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><circle cx="35" cy="62" r="7" fill="#818cf8" opacity=".3"/><line x1="110" y1="65" x2="130" y2="40" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><line x1="130" y1="40" x2="130" y2="65" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/><line x1="110" y1="58" x2="145" y2="30" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/><text x="150" y="28" fill="#60a5fa" font-size="7">左脚↑</text><path d="M80,65 Q95,35 110,65" fill="none" stroke="#4ade80" stroke-width="2"/><text x="95" y="48" text-anchor="middle" fill="#4ade80" font-size="8" font-weight="700">お尻UP</text><line x1="25" y1="72" x2="160" y2="72" stroke="#27272a" stroke-width="1" stroke-dasharray="3"/></svg><div class="pose-label">右足で踏ん張り、お尻を持ち上げる</div></div></div>`,
     steps:[
-      '<strong>仰向けに寝る</strong>。両膝を曲げて足を床につける。',
-      '<strong>左脚を天井に向けてまっすぐ伸ばす</strong>（or 膝を胸に抱える）。',
-      '右足で床を踏み、<strong>お尻を天井に向かって持ち上げる</strong>。',
-      '上で<strong>1秒止めて</strong>、ゆっくり下ろす。床にお尻がつく直前でまた上げる。',
-      '<strong>10回 × 3セット</strong>（セット間10秒休み）。',
+      '<strong>仰向けに寝る</strong>。両膝を曲げて、両足を床につける。',
+      '<strong>左脚を天井に向かって伸ばす</strong>。難しければ左膝を胸に抱えてもOK。',
+      '<strong>右足で床をグッと踏み、お尻を天井に向かって持ち上げる</strong>。',
+      '肩〜膝が<strong>一直線</strong>になるところまで上げる。',
+      '上で<strong>1秒止めて</strong>、ゆっくり下ろす。お尻が床につく直前でまた上げる。',
+      '<strong>10回×3セット</strong>（セット間10秒休み）。',
     ],
     feel:'<strong>お尻がキュッと締まる</strong>感覚。腰ではなくお尻で持ち上げる。',
     warn:'<strong>腰を反らせて持ち上げない</strong>。お尻の筋肉で上げる。腰が痛むなら両脚ブリッジからスタート。',
@@ -856,6 +881,9 @@ function render(){
     s.prep.forEach(p=>h+=`<li>${p}</li>`);
     h+=`</ul></div>`;
   }
+
+  // Diagram
+  if(s.diagram)h+=s.diagram;
 
   // Steps
   h+=`<div class="inst-card"><div class="inst-header"><span class="icon">&#128220;</span> やり方</div><div class="inst-content"><div class="num-steps">`;
